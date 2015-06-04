@@ -21,8 +21,7 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceVisitor;
 import org.eclipse.core.runtime.CoreException;
 import org.jboss.tools.jst.js.bower.internal.BowerConstants;
-import org.jboss.tools.jst.js.bower.internal.preferences.BowerPreferenceHolder;
-import org.jboss.tools.jst.js.internal.util.PlatformUtil;
+import org.jboss.tools.jst.js.bower.internal.preference.BowerPreferenceHolder;
 
 /**
  * @author Ilya Buziuk (ibuziuk)
@@ -59,26 +58,21 @@ public final class BowerUtil {
 	}
 	
 	public static String getBowerExecutableLocation() {
-		String bowerExecutable = (PlatformUtil.isWindows()) ? BowerConstants.BOWER_CMD : BowerConstants.BOWER; // "bower.cmd" (Windows) / "bower" (Linux & Mac OS)
-		File npm = new File(BowerPreferenceHolder.getNpmLocation()); // "npm" dir
-		if (npm != null && npm.exists()) {
-			String bowerRoot;
-			if (PlatformUtil.isWindows()) {
-				// Bower Root on Windows - 'npm' folder
-				bowerRoot = npm.getAbsolutePath();
-			} else {
-				// Bower Root on Linux & Mac Os - "/usr/local/lib/node_modules/bower/bin"
-				bowerRoot = npm.getAbsolutePath() + File.separator + BowerConstants.NODE_MODULES + File.separator
-						+ BowerConstants.BOWER + File.separator + BowerConstants.BIN;
-			}
-			
-			File bower = new File(bowerRoot, bowerExecutable);
-			if (bower != null && bower.exists()) {
-				return bower.getAbsolutePath();
-			}
-		
+		String bowerExecutableLocation = null;
+		File bowerExecutable = new File(BowerPreferenceHolder.getBowerLocation(), BowerConstants.BOWER);
+		if (bowerExecutable != null && bowerExecutable.exists()) {
+			bowerExecutableLocation = bowerExecutable.getAbsolutePath();
 		}
-		return null;
+		return bowerExecutableLocation;
+	}
+	
+	public static String getNodeExecutableLocation() {
+		String nodeExecutableLocation = null;
+		File nodeExecutable = new File(BowerPreferenceHolder.getNodeLocation(), BowerConstants.NODE_EXE); // TODO: Mac & Linux check
+		if (nodeExecutable != null && nodeExecutable.exists()) {
+			nodeExecutableLocation = nodeExecutable.getAbsolutePath();
+		}
+		return nodeExecutableLocation;
 	}
 
 }

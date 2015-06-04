@@ -15,7 +15,7 @@ import org.eclipse.jface.preference.PreferenceDialog;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.dialogs.PreferencesUtil;
 import org.jboss.tools.jst.js.bower.internal.Messages;
-import org.jboss.tools.jst.js.bower.internal.preferences.BowerPreferencePage;
+import org.jboss.tools.jst.js.bower.internal.preference.BowerPreferencePage;
 
 /**
  * @author "Ilya Buziuk (ibuziuk)"

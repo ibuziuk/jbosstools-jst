@@ -17,7 +17,7 @@ import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.util.IPropertyChangeListener;
 import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
-import org.jboss.tools.jst.js.bower.internal.preferences.BowerPreferenceHolder;
+import org.jboss.tools.jst.js.bower.internal.preference.BowerPreferenceHolder;
 import org.osgi.framework.BundleContext;
 
 /**

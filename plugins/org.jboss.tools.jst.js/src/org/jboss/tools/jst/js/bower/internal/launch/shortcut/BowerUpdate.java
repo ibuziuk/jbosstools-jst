@@ -37,7 +37,8 @@ public class BowerUpdate extends GenericBowerLaunch {
 	protected String getLaunchName() {
 		return LAUNCH_NAME;
 	}
-
+	
+	// This method works utterly wrong
 	@Override
 	protected String getWorkingDirectory(IResource resource) throws CoreException {
 		final List<IFile> foundFiles = new ArrayList<>();

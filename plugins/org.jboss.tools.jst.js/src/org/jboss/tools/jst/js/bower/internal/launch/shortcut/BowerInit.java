@@ -52,7 +52,7 @@ public class BowerInit extends GenericBowerLaunch {
 	}
 
 	@Override
-	protected void execute(String workingDirectory, String bowerExecutableLocation) {
+	protected void execute(String workingDirectory, String nodeExecutableLocation, String bowerExecutableLocation) {
 		try {
 			String name = root.getProject().getName();
 			IFile file = this.root.getFile(BowerConstants.BOWER_JSON);

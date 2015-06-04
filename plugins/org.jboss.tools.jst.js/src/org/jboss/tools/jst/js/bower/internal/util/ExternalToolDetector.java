@@ -23,8 +23,12 @@ public final class ExternalToolDetector {
 	private ExternalToolDetector() {
 	}
 
-	public static String detectNpm() {
-		return detectNpmFromPathVariable();
+	public static String detectNode() {
+		return null;
+	}
+	
+	public static String detectBower() {
+		return null;
 	}
 
 	private static String detectNpmFromPathVariable() {
