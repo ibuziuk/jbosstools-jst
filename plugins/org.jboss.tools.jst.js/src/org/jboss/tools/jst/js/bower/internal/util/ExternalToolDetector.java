@@ -12,7 +12,7 @@ package org.jboss.tools.jst.js.bower.internal.util;
 
 import java.io.File;
 
-import org.jboss.tools.jst.js.bower.internal.BowerConstants;
+import static org.jboss.tools.jst.js.bower.internal.BowerConstants.*;
 import org.jboss.tools.jst.js.internal.util.PlatformUtil;
 
 /**
@@ -24,26 +24,56 @@ public final class ExternalToolDetector {
 	}
 
 	public static String detectNode() {
-		return null;
+		return detectNodeFromPath();
 	}
 	
 	public static String detectBower() {
-		return null;
+		String bowerLocation = null;
+		String npmLocation = detectNpmFromPath();
+		if (npmLocation != null) {
+			String separator = File.separator;
+			if (!npmLocation.endsWith(separator)) {
+				npmLocation = npmLocation + separator;
+			}
+			
+			File bowerHome =  new File(npmLocation, NODE_MODULES + separator + BOWER + separator + BIN);
+			if (bowerHome != null && bowerHome.exists()) {
+				bowerLocation = bowerHome.getAbsolutePath();
+			}
+		}
+		return bowerLocation;
 	}
-
-	private static String detectNpmFromPathVariable() {
-		String npmLocation = null;
-		if (PlatformUtil.isWindows()) {
-			String path = System.getenv(BowerConstants.PATH);
-			String[] split = path.split(";"); //$NON-NLS-1$
-			for (String pathElement : split) {
-				if (pathElement.endsWith(File.separator + BowerConstants.NPM)) {
-					npmLocation = pathElement;
+	
+	private static String detectNpmFromPath() {
+		return detectFromPath(File.separator + NPM);
+	}
+	
+	private static String detectNodeFromPath() {
+		return detectFromPath(File.separator + NODE_JS);
+	}
+	
+	private static String detectFromPath(final String pattern) {
+		String nodeLocation = null;
+		String path = getPath();
+		String spliter = getPathSpliter();
+		if (path != null) {
+			String[] pathElements = path.split(spliter);
+			for (String element : pathElements) {
+				if (element.contains(pattern)) {
+					nodeLocation = element;
 					break;
 				}
 			}
 		}
-		return npmLocation;
+		return nodeLocation;
+	}
+	
+	private static String getPath() {
+		return System.getenv(PATH);
+	}
+	
+	private static String getPathSpliter() {
+		return (PlatformUtil.isWindows()) ? ";" : ":"; //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 }

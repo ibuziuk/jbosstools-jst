@@ -23,7 +23,7 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.IEditorPart;
 import org.jboss.tools.jst.js.bower.internal.ui.ExceptionNotifier;
-import org.jboss.tools.jst.js.bower.internal.util.BowerUtil;
+import org.jboss.tools.jst.js.bower.internal.util.ExternalToolUtil;
 import org.jboss.tools.jst.js.internal.Activator;
 
 /**
@@ -38,8 +38,8 @@ public abstract class GenericBowerLaunch implements ILaunchShortcut {
 			 Object element = ((IStructuredSelection)selection).getFirstElement();
 			 if (element != null && element instanceof IResource) {
 				try {
-					String nodeLocation = BowerUtil.getNodeExecutableLocation();
-					String bowerLocation = BowerUtil.getBowerExecutableLocation();
+					String nodeLocation = ExternalToolUtil.getNodeExecutableLocation();
+					String bowerLocation = ExternalToolUtil.getBowerExecutableLocation();
 					if (nodeLocation == null || nodeLocation.isEmpty()) {
 						ExceptionNotifier.npmLocationNotDefined(); // TODO: FIX error message
 					} else if (bowerLocation == null || bowerLocation.isEmpty()) {
@@ -66,8 +66,9 @@ public abstract class GenericBowerLaunch implements ILaunchShortcut {
 			ILaunchConfigurationWorkingCopy wc = cfg.getWorkingCopy();
 			wc.setAttribute(IExternalToolConstants.ATTR_LOCATION, nodeExecutableLocation);
 			wc.setAttribute(IExternalToolConstants.ATTR_WORKING_DIRECTORY, "${workspace_loc:" + workingDirectory + "}"); //$NON-NLS-1$ //$NON-NLS-2$
-			// Add a good comment here
-			wc.setAttribute(IExternalToolConstants.ATTR_TOOL_ARGUMENTS, bowerExecutableLocation + " " + getCommandArguments()); //$NON-NLS-1$
+			
+			// The argument passed to Node are: 1) bower executable location 2) bower command name ("update", "init", "install" etc.)
+			wc.setAttribute(IExternalToolConstants.ATTR_TOOL_ARGUMENTS, bowerExecutableLocation + " " + getCommandName()); //$NON-NLS-1$
 			cfg = wc.doSave();
 			cfg.launch(ILaunchManager.RUN_MODE, null, false, true);
 			cfg.delete();
@@ -80,7 +81,7 @@ public abstract class GenericBowerLaunch implements ILaunchShortcut {
 	
 	protected abstract String getWorkingDirectory(IResource project) throws CoreException;
 
-	protected abstract String getCommandArguments();
+	protected abstract String getCommandName();
 
 	protected abstract String getLaunchName();
 }

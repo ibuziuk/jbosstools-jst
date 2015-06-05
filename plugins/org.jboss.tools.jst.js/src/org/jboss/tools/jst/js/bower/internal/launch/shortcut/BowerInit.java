@@ -33,7 +33,7 @@ public class BowerInit extends GenericBowerLaunch {
 	private Container root;
 
 	@Override
-	protected String getCommandArguments() {
+	protected String getCommandName() {
 		return BowerCommands.INIT.getValue() + " --config.interactive"; //$NON-NLS-1$
 	}
 

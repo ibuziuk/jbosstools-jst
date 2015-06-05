@@ -10,7 +10,6 @@
  ******************************************************************************/
 package org.jboss.tools.jst.js.bower.internal.util;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +20,6 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceVisitor;
 import org.eclipse.core.runtime.CoreException;
 import org.jboss.tools.jst.js.bower.internal.BowerConstants;
-import org.jboss.tools.jst.js.bower.internal.preference.BowerPreferenceHolder;
 
 /**
  * @author Ilya Buziuk (ibuziuk)
@@ -57,22 +55,4 @@ public final class BowerUtil {
 		return (BowerConstants.BOWER_JSON.equals(resource.getName()) && resource.exists());
 	}
 	
-	public static String getBowerExecutableLocation() {
-		String bowerExecutableLocation = null;
-		File bowerExecutable = new File(BowerPreferenceHolder.getBowerLocation(), BowerConstants.BOWER);
-		if (bowerExecutable != null && bowerExecutable.exists()) {
-			bowerExecutableLocation = bowerExecutable.getAbsolutePath();
-		}
-		return bowerExecutableLocation;
-	}
-	
-	public static String getNodeExecutableLocation() {
-		String nodeExecutableLocation = null;
-		File nodeExecutable = new File(BowerPreferenceHolder.getNodeLocation(), BowerConstants.NODE_EXE); // TODO: Mac & Linux check
-		if (nodeExecutable != null && nodeExecutable.exists()) {
-			nodeExecutableLocation = nodeExecutable.getAbsolutePath();
-		}
-		return nodeExecutableLocation;
-	}
-
 }
