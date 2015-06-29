@@ -10,7 +10,9 @@
  ******************************************************************************/
 package org.jboss.tools.jst.js.bower.internal.launch.type;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import org.eclipse.core.internal.resources.Container;
 import org.eclipse.core.resources.IContainer;
@@ -35,7 +37,6 @@ import org.jboss.tools.jst.js.util.WorkbenchResourceUtil;
 public class BowerInitLaunchConfigurationDelegate implements ILaunchConfigurationDelegate {
 	public final static String ID = "org.jboss.tools.jst.js.bower.bowerLaunchConfigurationType"; //$NON-NLS-1$
 
-
 	@Override
 	public void launch(ILaunchConfiguration configuration, String mode, ILaunch launch, IProgressMonitor monitor)
 			throws CoreException {
@@ -43,20 +44,21 @@ public class BowerInitLaunchConfigurationDelegate implements ILaunchConfiguratio
 		String name = configuration.getAttribute(BowerLaunchConstants.ATTR_BOWER_NAME, ""); //$NON-NLS-1$
 		String version = configuration.getAttribute(BowerLaunchConstants.ATTR_BOWER_VERSION, ""); //$NON-NLS-1$
 		String license = configuration.getAttribute(BowerLaunchConstants.ATTR_BOWER_LICENSE, ""); //$NON-NLS-1$
-		
+		List<String> authors = configuration.getAttribute(BowerLaunchConstants.ATTR_BOWER_AUTHORS, new ArrayList<String>());
+				
 		IContainer root = ResourcesPlugin.getWorkspace().getRoot().getContainerForLocation(new Path(dir));
 		if (root != null && root.exists()) {
 			IFile file = ((Container) root).getFile(BowerConstants.BOWER_JSON);
 			if (!file.exists()) {
 				BowerJson bowerJson = new BowerJson.Builder().name(name).version(version)
-						.authrors(Arrays.asList(BowerConstants.DEFAULT_AUTHORS)).license(license)
+						.authrors(authors).license(license)
 						.ignore(Arrays.asList(BowerConstants.DEFAULT_IGNORE)).build();
 				String json = BowerUtil.generateJson(bowerJson);
 				WorkbenchResourceUtil.createFile(file, json);
 				WorkbenchResourceUtil.openInEditor(file);
 			}
 		} else {
-			// TODO: need to handle that case 
+			// TODO: need to handle that case - Error Dialog
 		}
 	}
 }
