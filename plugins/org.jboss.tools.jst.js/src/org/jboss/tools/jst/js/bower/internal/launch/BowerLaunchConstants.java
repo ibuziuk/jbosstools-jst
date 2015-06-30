@@ -14,4 +14,5 @@ public final class BowerLaunchConstants {
 	public static final String ATTR_BOWER_VERSION = "ATTR_BOWER_VERSION"; //$NON-NLS-1$
 	public static final String ATTR_BOWER_LICENSE = "ATTR_BOWER_LICENSE"; //$NON-NLS-1$
 	public static final String ATTR_BOWER_AUTHORS = "ATTR_BOWER_AUTHORS"; //$NON-NLS-1$
+	public static final String ATTR_BOWER_IGNORE = "ATTR_BOWER_IGNORE"; //$NON-NLS-1$
 }

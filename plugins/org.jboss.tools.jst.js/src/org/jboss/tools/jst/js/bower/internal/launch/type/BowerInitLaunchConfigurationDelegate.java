@@ -11,7 +11,6 @@
 package org.jboss.tools.jst.js.bower.internal.launch.type;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.eclipse.core.internal.resources.Container;
@@ -45,6 +44,7 @@ public class BowerInitLaunchConfigurationDelegate implements ILaunchConfiguratio
 		String version = configuration.getAttribute(BowerLaunchConstants.ATTR_BOWER_VERSION, ""); //$NON-NLS-1$
 		String license = configuration.getAttribute(BowerLaunchConstants.ATTR_BOWER_LICENSE, ""); //$NON-NLS-1$
 		List<String> authors = configuration.getAttribute(BowerLaunchConstants.ATTR_BOWER_AUTHORS, new ArrayList<String>());
+		List<String> ignore = configuration.getAttribute(BowerLaunchConstants.ATTR_BOWER_IGNORE, new ArrayList<String>());
 				
 		IContainer root = ResourcesPlugin.getWorkspace().getRoot().getContainerForLocation(new Path(dir));
 		if (root != null && root.exists()) {
@@ -52,7 +52,7 @@ public class BowerInitLaunchConfigurationDelegate implements ILaunchConfiguratio
 			if (!file.exists()) {
 				BowerJson bowerJson = new BowerJson.Builder().name(name).version(version)
 						.authrors(authors).license(license)
-						.ignore(Arrays.asList(BowerConstants.DEFAULT_IGNORE)).build();
+						.ignore(ignore).build();
 				String json = BowerUtil.generateJson(bowerJson);
 				WorkbenchResourceUtil.createFile(file, json);
 				WorkbenchResourceUtil.openInEditor(file);
