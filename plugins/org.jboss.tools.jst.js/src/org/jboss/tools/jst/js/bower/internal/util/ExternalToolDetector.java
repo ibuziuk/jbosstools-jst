@@ -27,9 +27,8 @@ public final class ExternalToolDetector {
 
 	public static String detectNode() {
 		String nodeLocation = null;
-		if (PlatformUtil.isWindows()) {
-			nodeLocation = detectFromPath(File.separator + NODE_JS);
-		} else {
+		nodeLocation = detectFromPath(File.separator + NODE_JS);
+		if (nodeLocation == null && !PlatformUtil.isWindows()) {
 			// Detecting Node for Mac & Linux
 			File usrLocalBin = new File(USR_LOCAL_BIN);
 			if (usrLocalBin != null && usrLocalBin.exists()) {
