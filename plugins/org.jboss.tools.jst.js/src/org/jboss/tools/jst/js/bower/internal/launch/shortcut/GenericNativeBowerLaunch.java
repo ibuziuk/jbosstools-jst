@@ -10,6 +10,8 @@
  *******************************************************************************/
 package org.jboss.tools.jst.js.bower.internal.launch.shortcut;
 
+import java.io.UnsupportedEncodingException;
+
 import org.eclipse.core.externaltools.internal.IExternalToolConstants;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
@@ -106,7 +108,8 @@ public abstract class GenericNativeBowerLaunch implements ILaunchShortcut {
 									&& workingProject.exists()) {
 								try {
 									workingProject.refreshLocal(IResource.DEPTH_INFINITE, null);
-								} catch (CoreException e) {
+									makeBowerComponentsFolderDerived(workingProject);
+								} catch (CoreException | UnsupportedEncodingException e) {
 									Activator.logError(e);
 								} finally {
 									DebugPlugin.getDefault().removeDebugEventListener(this);
@@ -119,11 +122,13 @@ public abstract class GenericNativeBowerLaunch implements ILaunchShortcut {
 			}
 		}
 	};
-
+	
 	protected abstract String getWorkingDirectory(IResource resource) throws CoreException;
 
 	protected abstract String getCommandName();
 
 	protected abstract String getLaunchName();
+	
+	protected abstract void makeBowerComponentsFolderDerived(IProject project) throws CoreException, UnsupportedEncodingException;
 
 }

@@ -15,13 +15,17 @@ import java.io.UnsupportedEncodingException;
 
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.swt.browser.PlatformUtil;
 import org.jboss.tools.jst.js.bower.BowerCommands;
 import org.jboss.tools.jst.js.bower.internal.BowerConstants;
 import org.jboss.tools.jst.js.bower.util.BowerUtil;
 import org.jboss.tools.jst.js.internal.Activator;
+import org.jboss.tools.jst.js.util.WorkbenchResourceUtil;
 
 /**
  * @author "Ilya Buziuk (ibuziuk)"
@@ -88,5 +92,22 @@ public class BowerUpdate extends GenericNativeBowerLaunch {
 			workingDir = BowerUtil.getBowerWorkingDir(project, BowerConstants.BOWER_COMPONENTS);
 		}
 		return workingDir;
+	}
+
+	@Override
+	protected void makeBowerComponentsFolderDerived(IProject project) throws CoreException, UnsupportedEncodingException {
+		if (project != null && project.exists()) {
+			IFile bowerrc = BowerUtil.getBowerrc(project);	
+			if (bowerrc != null && bowerrc.exists()) {
+				String dirName = BowerUtil.getDirectoryName(bowerrc);
+				if (dirName != null) {
+					IResource componentsFolder = project.findMember(dirName);
+					if (componentsFolder != null && componentsFolder.exists() && componentsFolder.getType() == IResource.FOLDER) {
+						componentsFolder.setDerived(true, new NullProgressMonitor());
+					}
+				}	
+			}
+		}
+
 	}
 }
