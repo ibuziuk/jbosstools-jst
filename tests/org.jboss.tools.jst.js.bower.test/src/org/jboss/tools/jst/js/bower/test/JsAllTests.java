@@ -8,7 +8,7 @@
  * Contributors:
  *     Red Hat, Inc. - initial API and implementation
  ******************************************************************************/
-package org.jboss.tools.js.test;
+package org.jboss.tools.jst.js.bower.test;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -26,7 +26,7 @@ public class JsAllTests {
 		s.addTestSuite(BowerUITestCase.class);
 		suite.addTest(
 				new ProjectImportTestSetup(s,
-				"org.jboss.tools.jst.js.test", //$NON-NLS-1$
+				"org.jboss.tools.jst.js.bower.test", //$NON-NLS-1$
 				new String[] { "projects/TestBowerProject" }, //$NON-NLS-1$
 				new String[] { "TestBowerProject" })); //$NON-NLS-1$
 

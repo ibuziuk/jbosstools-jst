@@ -8,7 +8,7 @@
  * Contributors: 
  * Red Hat, Inc. - initial API and implementation 
  ******************************************************************************/
-package org.jboss.tools.js.test;
+package org.jboss.tools.jst.js.bower.test;
 
 import java.io.InputStreamReader;
 import java.io.Reader;
@@ -22,7 +22,6 @@ import org.eclipse.core.runtime.Path;
 import org.jboss.tools.jst.js.bower.BowerJson;
 import org.jboss.tools.jst.js.bower.Bowerrc;
 import org.jboss.tools.jst.js.bower.util.BowerUtil;
-import org.jboss.tools.jst.js.util.WorkbenchResourceUtil;
 
 import com.google.gson.Gson;
 
@@ -86,19 +85,6 @@ public class BowerCoreTestCase extends TestCase {
 		String directoryName = BowerUtil.getDirectoryName(bowerrc);
 		assertNotNull(directoryName);
 		assertEquals(directoryName, "components"); //$NON-NLS-1$
-	}
-	
-	public void testFindFileRecursively() throws CoreException {
-		IFile bowerJson = WorkbenchResourceUtil.findFileRecursively(testProject, "bower.json"); //$NON-NLS-1$
-		assertNotNull(bowerJson);
-		assertTrue(bowerJson.exists());
-		
-		IFile bowerrc = WorkbenchResourceUtil.findFileRecursively(testProject, ".bowerrc"); //$NON-NLS-1$
-		assertNotNull(bowerrc);
-		assertTrue(bowerrc.exists());
-		
-		IFile nonExistingFile = WorkbenchResourceUtil.findFileRecursively(testProject, "nonExistingFile.html"); //$NON-NLS-1$
-		assertNull(nonExistingFile);
 	}
 	
 }

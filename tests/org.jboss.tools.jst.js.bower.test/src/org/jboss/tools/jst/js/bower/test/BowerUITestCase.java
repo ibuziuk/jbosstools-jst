@@ -8,15 +8,13 @@
  * Contributors: 
  * Red Hat, Inc. - initial API and implementation 
  ******************************************************************************/
-package org.jboss.tools.js.test;
+package org.jboss.tools.jst.js.bower.test;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.swtbot.eclipse.finder.SWTWorkbenchBot;
 import org.eclipse.swtbot.eclipse.finder.widgets.SWTBotView;
 import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
-import org.eclipse.swtbot.swt.finder.finders.ContextMenuHelper;
-import org.eclipse.swtbot.swt.finder.widgets.SWTBotMenu;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotShell;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotTree;
 
@@ -38,18 +36,6 @@ public class BowerUITestCase extends TestCase {
 	public void testProject() {
 		assertNotNull("Can't load TestBowerProject", this.testProject); //$NON-NLS-1$
 		assertTrue(this.testProject.exists());
-	}
-
-	public void testBowerUpdateShortcutAvailability() {
-		SWTBotView packageExplorer = getProjectExplorer();
-		SWTBotTree tree = packageExplorer.bot().tree();
-		packageExplorer.show();
-		String testProjectName = this.testProject.getName();
-		assertTrue("Project does not exist", isProjectCreated(testProjectName)); //$NON-NLS-1$
-		tree.select(testProjectName);
-		SWTBotMenu bowerUpdate = new SWTBotMenu(ContextMenuHelper.contextMenu(tree, "Run As", "Run Configurations...")); //$NON-NLS-1$ //$NON-NLS-2$
-//		SWTBotMenu bowerUpdate = new SWTBotMenu(ContextMenuHelper.contextMenu(tree, "Run As", "Bower Update")); //$NON-NLS-1$ //$NON-NLS-2$
-		assertTrue(bowerUpdate.isVisible());
 	}
 	
 	public void testbowerInitWizard() {
