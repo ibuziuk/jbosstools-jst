@@ -22,7 +22,7 @@ import org.jboss.tools.jst.js.node.preference.NodePreferencePage;
 /**
  * @author "Ilya Buziuk (ibuziuk)"
  */
-public class ExceptionNotifier {
+public class NodeExceptionNotifier {
 	
 	public static void nodeLocationNotDefined() {
 		boolean define = MessageDialog.openQuestion(Display.getDefault().getActiveShell(),

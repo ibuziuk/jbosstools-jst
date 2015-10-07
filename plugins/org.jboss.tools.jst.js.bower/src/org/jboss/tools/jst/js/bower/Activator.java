@@ -24,7 +24,7 @@ import org.osgi.framework.BundleContext;
 public class Activator extends AbstractUIPlugin {
 
 	// The plug-in ID
-	public static final String PLUGIN_ID = "org.jboss.tools.jst.js"; //$NON-NLS-1$
+	public static final String PLUGIN_ID = "org.jboss.tools.jst.js.bower"; //$NON-NLS-1$
 
 	// The shared instance
 	private static Activator plugin;
@@ -44,11 +44,6 @@ public class Activator extends AbstractUIPlugin {
 		super.stop(context);
 	}
 
-	/**
-	 * Returns the shared instance
-	 *
-	 * @return the shared instance
-	 */
 	public static Activator getDefault() {
 		return plugin;
 	}

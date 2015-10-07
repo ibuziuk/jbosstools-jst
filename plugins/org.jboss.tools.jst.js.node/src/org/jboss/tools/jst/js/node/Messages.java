@@ -17,15 +17,18 @@ import org.eclipse.osgi.util.NLS;
  */
 public class Messages extends NLS {
 	private static final String BUNDLE_NAME = Messages.class.getName().toString().toLowerCase();
+	
+	public static String PreferenceCategory_ExternalJsTools;
 
 	public static String NodePreferencePage_NotSpecifiedNodeWarning;
 	public static String NodePreferencePage_NotValidNodeError;
 	public static String NodePreferencePage_NodeLocationLabel;
+	
 	public static String ErrorHandler_LaunchErrorTitle;
 	public static String ErrorHandler_LaunchErrorMessage;
-	public static String PreferenceCategory_ExternalJsTools;
 	public static String ErrorHandler_NodeNotDefinedTitle;
 	public static String ErrorHandler_NodeNotDefinedMessage;
+
 	
 	static {
 		NLS.initializeMessages(BUNDLE_NAME, Messages.class);

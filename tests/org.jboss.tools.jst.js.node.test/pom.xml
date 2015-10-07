@@ -12,8 +12,8 @@
 	<packaging>eclipse-test-plugin</packaging>
 
 	<properties>
-		<coverage.filter>org.jboss.tools.jst.js*</coverage.filter>
-		<emma.instrument.bundles>org.jboss.tools.jst.js</emma.instrument.bundles>
+		<coverage.filter>org.jboss.tools.jst.js.node*</coverage.filter>
+		<emma.instrument.bundles>org.jboss.tools.jst.js.node</emma.instrument.bundles>
 	</properties>
 
 	<build>

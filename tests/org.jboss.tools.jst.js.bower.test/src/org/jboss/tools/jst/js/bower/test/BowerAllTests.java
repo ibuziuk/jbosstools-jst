@@ -17,10 +17,10 @@ import org.jboss.tools.test.util.ProjectImportTestSetup;
 /**
  * @author "Ilya Buziuk (ibuziuk)"
  */
-public class JsAllTests {
+public class BowerAllTests {
 
 	public static Test suite() {
-		TestSuite suite = new TestSuite(JsAllTests.class.getName());
+		TestSuite suite = new TestSuite(BowerAllTests.class.getName());
 		TestSuite s = new TestSuite("Bower content"); //$NON-NLS-1$
 		s.addTestSuite(BowerCoreTestCase.class);
 		s.addTestSuite(BowerUITestCase.class);

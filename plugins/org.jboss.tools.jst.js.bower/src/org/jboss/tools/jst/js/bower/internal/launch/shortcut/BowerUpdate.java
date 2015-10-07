@@ -25,7 +25,7 @@ import org.jboss.tools.jst.js.bower.BowerCommands;
 import org.jboss.tools.jst.js.bower.internal.BowerConstants;
 import org.jboss.tools.jst.js.bower.internal.ui.BowerExceptionNotifier;
 import org.jboss.tools.jst.js.bower.util.BowerUtil;
-import org.jboss.tools.jst.js.node.exception.ExceptionNotifier;
+import org.jboss.tools.jst.js.node.exception.NodeExceptionNotifier;
 import org.jboss.tools.jst.js.node.launch.shortcut.GenericNativeNodeLaunch;
 import org.jboss.tools.jst.js.node.util.NodeExternalUtil;
 
@@ -45,7 +45,7 @@ public class BowerUpdate extends GenericNativeNodeLaunch {
 					String nodeLocation = NodeExternalUtil.getNodeExecutableLocation();
 					String bowerLocation = BowerUtil.getBowerExecutableLocation();
 					if (nodeLocation == null || nodeLocation.isEmpty()) {
-						ExceptionNotifier.nodeLocationNotDefined();
+						NodeExceptionNotifier.nodeLocationNotDefined();
 					} else if (bowerLocation == null || bowerLocation.isEmpty()) {
 						BowerExceptionNotifier.bowerLocationNotDefined();
 					} else {

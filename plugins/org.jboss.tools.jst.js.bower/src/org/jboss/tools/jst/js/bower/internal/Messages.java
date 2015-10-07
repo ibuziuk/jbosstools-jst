@@ -19,13 +19,11 @@ public class Messages extends NLS {
 	private static final String BUNDLE_NAME = Messages.class.getName().toString().toLowerCase();
 
 	public static String BowerPreferencePage_BowerLocationLabel;
-	public static String BowerPreferencePage_NotInstalledError;
 	public static String BowerPreferencePage_NotSpecifiedBowerWarning;
-	public static String BowerPreferencePage_NotValidNodeError;
 	public static String BowerPreferencePage_NotValidBowerError;
 
-	public static String ErrorHandler_BowerNotDefinedTitle;
-	public static String ErrorHandler_BowerNotDefinedMessage;
+	public static String BowerErrorHandler_BowerNotDefinedTitle;
+	public static String BowerErrorHandler_BowerNotDefinedMessage;
 	
 	public static String BowerLaunchConfigurationTab_launchMainTabName;
 	public static String BowerLaunchConfigurationTab_addParameter;
@@ -49,11 +47,9 @@ public class Messages extends NLS {
 	public static String BowerInitWizard_pageTitle;
 	public static String BowerInitWizard_pageDescription;
 	public static String BowerInitWizard_windowTitle;
-	
 	public static String BowerInitWizard_errorDirNotDefiened;
 	public static String BowerInitWizard_errorDirNotExist;
 	public static String BowerInitWizard_errorBowerJsonAlreadyExist;
-	
 	public static String BowerInitWizard_addAuthor;
 	public static String BowerInitWizard_editAuthor;
 	public static String BowerInitWizard_addIgnore;

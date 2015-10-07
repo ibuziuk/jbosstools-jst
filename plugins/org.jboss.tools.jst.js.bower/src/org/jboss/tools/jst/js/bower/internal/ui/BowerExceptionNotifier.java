@@ -24,7 +24,7 @@ public class BowerExceptionNotifier {
 
 	public static void bowerLocationNotDefined() {
 		boolean define = MessageDialog.openQuestion(Display.getDefault().getActiveShell(),
-				Messages.ErrorHandler_BowerNotDefinedTitle, Messages.ErrorHandler_BowerNotDefinedMessage);
+				Messages.BowerErrorHandler_BowerNotDefinedTitle, Messages.BowerErrorHandler_BowerNotDefinedMessage);
 		if (define) {
 			PreferenceDialog dialog = PreferencesUtil.createPreferenceDialogOn(Display.getDefault().getActiveShell(),
 					BowerPreferencePage.PAGE_ID, null, null);

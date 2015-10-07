@@ -27,7 +27,7 @@ import org.eclipse.debug.ui.ILaunchShortcut;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.ui.IEditorPart;
 import org.jboss.tools.jst.js.node.Activator;
-import org.jboss.tools.jst.js.node.exception.ExceptionNotifier;
+import org.jboss.tools.jst.js.node.exception.NodeExceptionNotifier;
 import org.jboss.tools.jst.js.node.util.WorkbenchResourceUtil;
 
 /**
@@ -73,7 +73,7 @@ public abstract class GenericNativeNodeLaunch implements ILaunchShortcut {
 			WorkbenchResourceUtil.showConsoleView();
 		} catch (CoreException e) {
 			Activator.logError(e);
-			ExceptionNotifier.launchError(e);
+			NodeExceptionNotifier.launchError(e);
 		}
 	}
 	

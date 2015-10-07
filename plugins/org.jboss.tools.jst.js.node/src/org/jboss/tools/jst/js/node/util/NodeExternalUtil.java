@@ -25,6 +25,7 @@ public final class NodeExternalUtil {
 		String nodeExecutableLocation = null;
 		String nodeExecutableName = getNodeExecutableName();
 		File nodeExecutable = new File(NodePreferenceHolder.getNodeLocation(), nodeExecutableName);
+		
 		if (nodeExecutable.exists()) {
 			nodeExecutableLocation = nodeExecutable.getAbsolutePath();
 		} else if (PlatformUtil.isLinux()) {
