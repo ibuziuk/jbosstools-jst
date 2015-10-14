@@ -24,7 +24,7 @@ public class NpmExceptionNotifier {
 
 	public static void bowerLocationNotDefined() {
 		boolean define = MessageDialog.openQuestion(Display.getDefault().getActiveShell(),
-				Messages.BowerErrorHandler_BowerNotDefinedTitle, Messages.BowerErrorHandler_BowerNotDefinedMessage);
+				Messages.NpmErrorHandler_NpmNotDefinedTitle, Messages.NpmErrorHandler_NpmNotDefinedMessage);
 		if (define) {
 			PreferenceDialog dialog = PreferencesUtil.createPreferenceDialogOn(Display.getDefault().getActiveShell(),
 					NpmPreferencePage.PAGE_ID, null, null);

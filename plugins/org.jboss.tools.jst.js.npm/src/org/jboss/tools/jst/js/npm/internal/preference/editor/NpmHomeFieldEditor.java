@@ -33,7 +33,7 @@ public class NpmHomeFieldEditor extends DirectoryFieldEditor {
 		String filename = getTextControl().getText();
 		filename = filename.trim();
 		if (filename.isEmpty()) {
-			this.getPage().setMessage(Messages.BowerPreferencePage_NotSpecifiedBowerWarning, IStatus.WARNING);
+			this.getPage().setMessage(Messages.NpmPreferencePage_NotSpecifiedNpmWarning, IStatus.WARNING);
 			return true;
 		} else {
 			// clear the warning message
@@ -47,7 +47,7 @@ public class NpmHomeFieldEditor extends DirectoryFieldEditor {
 		File selectedFile = new File(filename);
 		File bowerExecutable = new File(selectedFile, NpmConstants.BOWER);
 		if (bowerExecutable == null || !bowerExecutable.exists()) {
-			setErrorMessage(Messages.BowerPreferencePage_NotValidBowerError);
+			setErrorMessage(Messages.NpmPreferencePage_NotValidNpmError);
 			return false;
 		}
 		return true;

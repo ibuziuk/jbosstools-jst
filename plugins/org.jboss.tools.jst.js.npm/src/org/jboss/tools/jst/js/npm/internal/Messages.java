@@ -18,42 +18,38 @@ import org.eclipse.osgi.util.NLS;
 public class Messages extends NLS {
 	private static final String BUNDLE_NAME = Messages.class.getName().toString().toLowerCase();
 
-	public static String BowerPreferencePage_BowerLocationLabel;
-	public static String BowerPreferencePage_NotSpecifiedBowerWarning;
-	public static String BowerPreferencePage_NotValidBowerError;
+	public static String NpmPreferencePage_NpmLocationLabel;
+	public static String NpmPreferencePage_NotSpecifiedNpmWarning;
+	public static String NpmPreferencePage_NotValidNpmError;
 
-	public static String BowerErrorHandler_BowerNotDefinedTitle;
-	public static String BowerErrorHandler_BowerNotDefinedMessage;
+	public static String NpmErrorHandler_NpmNotDefinedTitle;
+	public static String NpmErrorHandler_NpmNotDefinedMessage;
 	
-	public static String BowerLaunchConfigurationTab_launchMainTabName;
-	public static String BowerLaunchConfigurationTab_addParameter;
-	public static String BowerLaunchConfigurationTab_editParameter;
-	public static String BowerLaunchConfigurationTab_buttonAdd;
-	public static String BowerLaunchConfigurationTab_buttonEdit;
-	public static String BowerLaunchConfigurationTab_buttonRemove;
-	public static String BowerLaunchConfigurationTab_Author;
-	public static String BowerLaunchConfigurationTab_Authors;
-	public static String BowerLaunchConfigurationTab_Ignore;
-	public static String BowerLaunchConfigurationTab_Properties;
-	public static String BowerLaunchConfigurationTab_Name;
-	public static String BowerLaunchConfigurationTab_Version;
-	public static String BowerLaunchConfigurationTab_License;
-	public static String BowerLaunchConfigurationTab_useDefaulConfiguration;
-	public static String BowerLaunchConfigurationTab_baseDirectory;
-	public static String BowerLaunchConfigurationTab_browseWorkspace;
-	public static String BowerLaunchConfigurationTab_rootFolderSelection;
+	public static String NpmInitWizard_WindowTitle;
+	public static String NpmInitWizard_LaunchMainTabName;
+	public static String NpmInitWizard_UseDefaulConfiguration;
+	public static String NpmInitWizard_RootFolderSelection;
+	public static String NpmInitWizard_BaseDirectory;
+	public static String NpmInitWizard_BrowseWorkspace;
 	
-	public static String BowerInitWizard_pageName;
-	public static String BowerInitWizard_pageTitle;
-	public static String BowerInitWizard_pageDescription;
-	public static String BowerInitWizard_windowTitle;
-	public static String BowerInitWizard_errorDirNotDefiened;
-	public static String BowerInitWizard_errorDirNotExist;
-	public static String BowerInitWizard_errorBowerJsonAlreadyExist;
-	public static String BowerInitWizard_addAuthor;
-	public static String BowerInitWizard_editAuthor;
-	public static String BowerInitWizard_addIgnore;
-	public static String BowerInitWizard_editIgnore;
+	public static String NpmInitWizard_ButtonAdd;
+	public static String NpmInitWizard_ButtonEdit;
+	public static String NpmInitWizard_ButtonRemove;
+	
+	public static String NpmInitWizard_Name;
+	public static String NpmInitWizard_Version;
+	public static String NpmInitWizard_License;
+	public static String NpmInitWizard_Properties;
+	public static String NpminitWizard_AddParameter;
+	public static String NpmINitWizard_EditParameter;
+	public static String NpmInitWizard_PageName;
+	public static String NpmInitWizard_PageTitle;
+	public static String NpmInitWizard_PageDescription;
+	
+	public static String NpmInitWizard_ErrorDirNotDefiened;
+	public static String NpmInitWizard_ErrorDirNotExist;
+	public static String NpmInitWizard_ErrorPackageJsonAlreadyExist;
+
 	
 	static {
 		NLS.initializeMessages(BUNDLE_NAME, Messages.class);

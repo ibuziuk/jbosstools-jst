@@ -4,20 +4,20 @@
    <extension
          point="org.eclipse.core.expressions.propertyTesters">
 	    <propertyTester
-	      	id="org.jboss.tools.jst.js.bower.update.tester"
+	      	id="org.jboss.tools.jst.js.npm.update.tester"
 	      	type="org.eclipse.core.resources.IResource"
-	      	namespace="org.jboss.tools.jst.js.bower.update"
-	      	properties="isBowerInit"
-	      	class="org.jboss.tools.jst.js.bower.internal.launch.tester.BowerUpdateTester">
+	      	namespace="org.jboss.tools.jst.js.npm.update"
+	      	properties="isNpmInit"
+	      	class="org.jboss.tools.jst.js.npm.internal.launch.tester.NpmUpdateTester">
 	    </propertyTester>
    </extension>
    <extension
          point="org.eclipse.debug.ui.launchShortcuts">
       <shortcut
-            class="org.jboss.tools.jst.js.bower.internal.launch.shortcut.BowerUpdate"
-            id="org.jboss.tools.jst.js.bower.update"
-            label="Bower Update"
-            icon="icons/bower_16.png"
+            class="org.jboss.tools.jst.js.npm.internal.launch.shortcut.NpmUpdate"
+            id="org.jboss.tools.jst.js.npm.update"
+            label="npm Update"
+            icon="icons/npm_16.png"
             modes="run">
         <contextualLaunch>
             <enablement>
@@ -25,7 +25,7 @@
                     <count value="1"/>
                     <iterate>
                         <adapt  type="org.eclipse.core.resources.IResource">
-	                        <test property="org.jboss.tools.jst.js.bower.update.isBowerInit" 
+	                        <test property="org.jboss.tools.jst.js.npm.update.isNpmInit" 
 	                           	forcePluginActivation="true"/>
                         </adapt> 
                     </iterate>
@@ -41,7 +41,7 @@
             name="npm Init"
             class="org.jboss.tools.jst.js.npm.internal.wizard.NpmInitWizard"
             category="org.eclipse.wst.jsdt.ui.java"
-            icon="icons/npm_16.png">
+            icon="icons/npm_16_6.png">
             <description>npm Init</description>
             <selection class="org.eclipse.core.resources.IResource"/>
       </wizard>
@@ -58,7 +58,7 @@
    <extension
       point="org.eclipse.core.runtime.preferences">
 	   <initializer
-	         class="org.jboss.tools.jst.js.bower.internal.preference.BowerPreferenceInitializer">
+	         class="org.jboss.tools.jst.js.npm.internal.preference.NpmPreferenceInitializer">
 	   </initializer>
 	</extension>
 </plugin>

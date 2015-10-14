@@ -38,7 +38,7 @@ public class NpmInitWizard extends Wizard implements INewWizard {
 	public NpmInitWizard() {
 		super();
 		setDefaultPageImageDescriptor(NpmPlugin.getImageDescriptor("/icons/npm_75.png")); //$NON-NLS-1$
-		setWindowTitle(Messages.BowerInitWizard_windowTitle);
+		setWindowTitle(Messages.NpmInitWizard_WindowTitle);
 	}
 
 	@Override

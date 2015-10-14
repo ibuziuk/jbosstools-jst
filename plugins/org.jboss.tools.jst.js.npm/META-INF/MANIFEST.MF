@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %bundleName
-Bundle-SymbolicName: org.jboss.tools.jst.js.bower;singleton:=true
+Bundle-SymbolicName: org.jboss.tools.jst.js.npm;singleton:=true
 Bundle-Version: 3.8.0.qualifier
 Bundle-Activator: org.jboss.tools.jst.js.npm.NpmPlugin
 Bundle-Vendor: %providerName

@@ -71,20 +71,20 @@ public class NpmInitPage extends WizardPage {
 	private Table authorsTable;
 	private Button addAuthorButton;
 	
-	private Table ignoreTable;
-	private Button addIgnoreButton;
+//	private Table ignoreTable;
+//	private Button addIgnoreButton;
 
 	private String defaultName;
 	private String defaultVersion;
 	private String defaultLicense;
-	private List<String> defaultAuthors;
-	private List<String> defaultIgnore;
+//	private List<String> defaultAuthors;
+//	private List<String> defaultIgnore;
 	private String defaultDirectory;
 	
 	public NpmInitPage(IStructuredSelection selection) {
-		super(Messages.BowerInitWizard_pageName);
-		setTitle(Messages.BowerInitWizard_pageTitle);
-		setDescription(Messages.BowerInitWizard_pageDescription);
+		super(Messages.NpmInitWizard_PageName);
+		setTitle(Messages.NpmInitWizard_PageTitle);
+		setDescription(Messages.NpmInitWizard_PageDescription);
 		this.selection = selection;
 	}
 	
@@ -97,8 +97,8 @@ public class NpmInitPage extends WizardPage {
 		createExecutionDirEditor(mainComposite);
 		createUseDefaultsEditor(mainComposite);
 		createBasePropertyEditor(mainComposite);
-		createAuthorsEditor(mainComposite);
-		createIgnoreEditor(mainComposite);
+//		createAuthorsEditor(mainComposite);
+//		createIgnoreEditor(mainComposite);
 		
 		Dialog.applyDialogFont(mainComposite);
 		initiDefaultsValues();
@@ -113,8 +113,8 @@ public class NpmInitPage extends WizardPage {
 		String name = nameText.getText();
 		String version = versionText.getText();
 		String license = licenseText.getText();
-		List<String> authors = getItems(authorsTable);
-		List<String> ignore = getItems(ignoreTable);
+//		List<String> authors = getItems(authorsTable);
+//		List<String> ignore = getItems(ignoreTable);
         
 		Builder builder = new PackageJson.Builder();
 	
@@ -130,13 +130,13 @@ public class NpmInitPage extends WizardPage {
 			builder.license(license);
 		}
 		
-		if (authors != null && !authors.isEmpty()) {
-			builder.authrors(authors);
-		}
-		
-		if (ignore != null && !ignore.isEmpty()) {
-			builder.ignore(ignore);
-		}
+//		if (authors != null && !authors.isEmpty()) {
+//			builder.authrors(authors);
+//		}
+//		
+//		if (ignore != null && !ignore.isEmpty()) {
+//			builder.ignore(ignore);
+//		}
 		
 		PackageJson model = builder.build();
 
@@ -155,7 +155,7 @@ public class NpmInitPage extends WizardPage {
 		this.defaultVersion = NpmConstants.DEFAULT_VERSION; 
 		this.defaultLicense =  NpmConstants.DEFAULT_LICENSE;
 		
-		this.defaultIgnore =  Arrays.asList(NpmConstants.DEFAULT_IGNORE);
+//		this.defaultIgnore =  Arrays.asList(NpmConstants.DEFAULT_IGNORE);
 				
 		this.dirText.setText(defaultDirectory);
 		this.nameText.setText(defaultName);
@@ -163,9 +163,9 @@ public class NpmInitPage extends WizardPage {
 		this.licenseText.setText(defaultLicense);
 		
 		// Authors
-		setDefaults(authorsTable, defaultAuthors);
-		// Ignore
-		setDefaults(ignoreTable, defaultIgnore);
+//		setDefaults(authorsTable, defaultAuthors);
+//		// Ignore
+//		setDefaults(ignoreTable, defaultIgnore);
 		
 		boolean useDefault = useDefaultCheckBox.getSelection();
 		
@@ -173,17 +173,17 @@ public class NpmInitPage extends WizardPage {
 		this.versionText.setEnabled(!useDefault);
 		this.licenseText.setEnabled(!useDefault);
 		
-		this.authorsTable.setEnabled(!useDefault);
-		this.addAuthorButton.setEnabled(!useDefault);
+//		this.authorsTable.setEnabled(!useDefault);
+//		this.addAuthorButton.setEnabled(!useDefault);
 		
-		this.ignoreTable.setEnabled(!useDefault);
-		this.addIgnoreButton.setEnabled(!useDefault);
+//		this.ignoreTable.setEnabled(!useDefault);
+//		this.addIgnoreButton.setEnabled(!useDefault);
 	}
 	
 	private void createExecutionDirEditor(Composite mainComposite) {
 		Label label = new Label(mainComposite, SWT.NONE);
 		label.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1));
-		label.setText(Messages.BowerLaunchConfigurationTab_baseDirectory);
+		label.setText(Messages.NpmInitWizard_BaseDirectory);
 
 		this.dirText = new Text(mainComposite, SWT.BORDER);
 		this.dirText.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 5, 1));
@@ -198,11 +198,11 @@ public class NpmInitPage extends WizardPage {
 		buttonComposite.setLayout(buttonGridLayout);
 
 		final Button browseWorkspaceButton = new Button(buttonComposite, SWT.NONE);
-		browseWorkspaceButton.setText(Messages.BowerLaunchConfigurationTab_browseWorkspace);
+		browseWorkspaceButton.setText(Messages.NpmInitWizard_BrowseWorkspace);
 		browseWorkspaceButton.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
 				ContainerSelectionDialog dialog = new ContainerSelectionDialog(getShell(), 
-						ResourcesPlugin.getWorkspace().getRoot(), false, Messages.BowerLaunchConfigurationTab_rootFolderSelection);
+						ResourcesPlugin.getWorkspace().getRoot(), false, Messages.NpmInitWizard_RootFolderSelection);
 				dialog.showClosedProjects(false);
 
 				int buttonId = dialog.open();
@@ -224,7 +224,7 @@ public class NpmInitPage extends WizardPage {
 	
 	private void createUseDefaultsEditor(Composite mainComposite) {
 		Composite group = SWTFactory.createComposite(mainComposite, 2, 1, GridData.FILL_HORIZONTAL);
-		useDefaultCheckBox = SWTFactory.createCheckButton(group, Messages.BowerLaunchConfigurationTab_useDefaulConfiguration, null, true, 2);
+		useDefaultCheckBox = SWTFactory.createCheckButton(group, Messages.NpmInitWizard_UseDefaulConfiguration, null, true, 2);
 
 		useDefaultCheckBox.addSelectionListener(new SelectionAdapter() {
 
@@ -236,8 +236,8 @@ public class NpmInitPage extends WizardPage {
 				licenseText.setEnabled(!useDefault);
 				authorsTable.setEnabled(!useDefault);
 				addAuthorButton.setEnabled(!useDefault);
-				ignoreTable.setEnabled(!useDefault);
-				addIgnoreButton.setEnabled(!useDefault);
+//				ignoreTable.setEnabled(!useDefault);
+//				addIgnoreButton.setEnabled(!useDefault);
 				if (useDefault) {
 					setDefaults();
 				} else {
@@ -246,55 +246,55 @@ public class NpmInitPage extends WizardPage {
 					licenseText.setEnabled(true);
 					authorsTable.setEnabled(true);
 					addAuthorButton.setEnabled(true);
-					ignoreTable.setEnabled(true);
-					addIgnoreButton.setEnabled(true);
+//					ignoreTable.setEnabled(true);
+//					addIgnoreButton.setEnabled(true);
 				}
 			}
 		});
 	}
 	
 	private void createBasePropertyEditor(Composite mainComposite) {
-		Group group = SWTFactory.createGroup(mainComposite, Messages.BowerLaunchConfigurationTab_Properties, 2, 1, GridData.FILL_HORIZONTAL);
+		Group group = SWTFactory.createGroup(mainComposite, Messages.NpmInitWizard_Properties, 2, 1, GridData.FILL_HORIZONTAL);
 		
 		Label nameLabel = new Label(group, SWT.NONE);
-		nameLabel.setText(Messages.BowerLaunchConfigurationTab_Name);
+		nameLabel.setText(Messages.NpmInitWizard_Name);
 		nameText = new Text(group, SWT.BORDER);
 		nameText.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		nameText.addModifyListener(new EntriesChangedListener());
 
 		Label versionLabel = new Label(group, SWT.NONE);
-		versionLabel.setText(Messages.BowerLaunchConfigurationTab_Version);
+		versionLabel.setText(Messages.NpmInitWizard_Version);
 		versionText = new Text(group, SWT.BORDER);
 		versionText.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		versionText.addModifyListener(new EntriesChangedListener());
 
 		Label licenseLabel = new Label(group, SWT.NONE);
-		licenseLabel.setText(Messages.BowerLaunchConfigurationTab_License);
+		licenseLabel.setText(Messages.NpmInitWizard_License);
 		licenseText = new Text(group, SWT.BORDER);
 		licenseText.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		licenseText.addModifyListener(new EntriesChangedListener());
 	}
 	
-	private void createAuthorsEditor(Composite mainComposite) {
-		TableGroupComposite authorsComposite = new TableGroupComposite(Messages.BowerLaunchConfigurationTab_Authors,
-				Messages.BowerLaunchConfigurationTab_Author, mainComposite, Messages.BowerInitWizard_addAuthor, Messages.BowerInitWizard_editAuthor);
-		authorsComposite.createControls();
-		this.authorsTable = authorsComposite.getTable();
-		this.addAuthorButton = authorsComposite.getAddButton();
-	}
+//	private void createAuthorsEditor(Composite mainComposite) {
+//		TableGroupComposite authorsComposite = new TableGroupComposite(Messages.BowerLaunchConfigurationTab_Authors,
+//				Messages.BowerLaunchConfigurationTab_Author, mainComposite, Messages.BowerInitWizard_addAuthor, Messages.BowerInitWizard_editAuthor);
+//		authorsComposite.createControls();
+//		this.authorsTable = authorsComposite.getTable();
+//		this.addAuthorButton = authorsComposite.getAddButton();
+//	}
 	
-	private void createIgnoreEditor(Composite mainComposite) {
-		TableGroupComposite ignoreComposite = new TableGroupComposite(Messages.BowerLaunchConfigurationTab_Ignore,
-				Messages.BowerLaunchConfigurationTab_Ignore, mainComposite, Messages.BowerInitWizard_addIgnore, Messages.BowerInitWizard_editIgnore); 
-		ignoreComposite.createControls();
-		this.ignoreTable = ignoreComposite.getTable();
-		this.addIgnoreButton = ignoreComposite.getAddButton();
-	}
+//	private void createIgnoreEditor(Composite mainComposite) {
+//		TableGroupComposite ignoreComposite = new TableGroupComposite(Messages.BowerLaunchConfigurationTab_Ignore,
+//				Messages.BowerLaunchConfigurationTab_Ignore, mainComposite, Messages.BowerInitWizard_addIgnore, Messages.BowerInitWizard_editIgnore); 
+//		ignoreComposite.createControls();
+//		this.ignoreTable = ignoreComposite.getTable();
+//		this.addIgnoreButton = ignoreComposite.getAddButton();
+//	}
 	
 
 	@Override
 	public String getName() {
-		return Messages.BowerLaunchConfigurationTab_launchMainTabName;
+		return Messages.NpmInitWizard_LaunchMainTabName;
 	}
 	
 	private List<String> getItems(Table table) {
@@ -323,8 +323,8 @@ public class NpmInitPage extends WizardPage {
 		versionText.setText(defaultVersion);
 		licenseText.setText(defaultLicense);
 		
-		setDefaults(authorsTable, defaultAuthors);
-		setDefaults(ignoreTable, defaultIgnore);	
+//		setDefaults(authorsTable, defaultAuthors);
+//		setDefaults(ignoreTable, defaultIgnore);	
 	}
 	
 	private class EntriesChangedListener implements ModifyListener, SelectionListener {
@@ -414,14 +414,14 @@ public class NpmInitPage extends WizardPage {
 			buttonComposite.setLayout(fillLayout);
 		    
 		    addButton = new Button(buttonComposite, SWT.NONE);
-		    addButton.setText(Messages.BowerLaunchConfigurationTab_buttonAdd);
+		    addButton.setText(Messages.NpmInitWizard_ButtonAdd);
 		    addButton.addSelectionListener(new SelectionAdapter() {
 		      public void widgetSelected(SelectionEvent e) {
 		        addProperty(addDialogTitle);
 		      }
 		    });
 		    editButton = new Button(buttonComposite, SWT.NONE);
-		    editButton.setText(Messages.BowerLaunchConfigurationTab_buttonEdit);
+		    editButton.setText(Messages.NpmInitWizard_ButtonEdit);
 		    editButton.addSelectionListener(new SelectionAdapter() {
 		      public void widgetSelected(SelectionEvent e) {
 		        if(table.getSelectionCount() > 0) {
@@ -434,7 +434,7 @@ public class NpmInitPage extends WizardPage {
 		    });
 		    editButton.setEnabled(false);
 		    removeButton = new Button(buttonComposite, SWT.NONE);
-		    removeButton.setText(Messages.BowerLaunchConfigurationTab_buttonRemove);
+		    removeButton.setText(Messages.NpmInitWizard_ButtonRemove);
 		    removeButton.addSelectionListener(new SelectionAdapter() {
 		      public void widgetSelected(SelectionEvent e) {
 		        if(table.getSelectionCount() > 0) {
@@ -466,19 +466,19 @@ public class NpmInitPage extends WizardPage {
 		String dir = dirText.getText();
 		if (dir == null || dir.isEmpty()) {
 			setPageComplete(false);
-			setErrorMessage(Messages.BowerInitWizard_errorDirNotDefiened);
+			setErrorMessage(Messages.NpmInitWizard_ErrorDirNotDefiened);
 		} else {
 			IContainer container = ResourcesPlugin.getWorkspace().getRoot().getContainerForLocation(new Path(dir));
 			if (container != null && container.exists()) {
 				IFile bowerJson = container.getFile(new Path(NpmConstants.PACKAGE_JSON));
 				if (bowerJson.exists()) {
-					setError(Messages.BowerInitWizard_errorBowerJsonAlreadyExist);
+					setError(Messages.NpmInitWizard_ErrorPackageJsonAlreadyExist);
 				} else {
 					
 					setComplete();
 				}
 			} else {
-				setError(Messages.BowerInitWizard_errorDirNotExist);
+				setError(Messages.NpmInitWizard_ErrorDirNotExist);
 			}
 		}
 	}

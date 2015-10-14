@@ -34,7 +34,7 @@ public class NpmPreferencePage extends FieldEditorPreferencePage implements IWor
 	@Override
 	protected void createFieldEditors() {
 		NpmHomeFieldEditor bowerHomeEditor = new NpmHomeFieldEditor(NpmPreferenceHolder.PREF_BOWER_LOCATION,
-				Messages.BowerPreferencePage_BowerLocationLabel, getFieldEditorParent());
+				Messages.NpmPreferencePage_NpmLocationLabel, getFieldEditorParent());
 		addField(bowerHomeEditor);
 	}
 	
