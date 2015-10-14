@@ -40,20 +40,20 @@ public final class NpmUtil {
 	private NpmUtil() {
 	}
 
-	public static boolean isBowerJsonExist(final IProject project) throws CoreException {
-		IFile bowerJson = null;
+	public static boolean isPackageJsonExist(final IProject project) throws CoreException {
+		IFile packageJson = null;
 		if (project != null && project.exists()) {
-			bowerJson = WorkbenchResourceUtil.findFileRecursively(project, NpmConstants.PACKAGE_JSON);
+			packageJson = WorkbenchResourceUtil.findFileRecursively(project, NpmConstants.PACKAGE_JSON);
 		}
-		return (bowerJson != null && bowerJson.exists());
+		return (packageJson != null && packageJson.exists());
 	}
 
-	public static boolean hasBowerJson(final IFolder folder) throws CoreException {
-		IResource bowerJson = folder.findMember(NpmConstants.PACKAGE_JSON);
-		return (bowerJson != null && bowerJson.exists());
+	public static boolean hasPackageJson(final IFolder folder) throws CoreException {
+		IResource packageJson = folder.findMember(NpmConstants.PACKAGE_JSON);
+		return (packageJson != null && packageJson.exists());
 	}
 
-	public static boolean isBowerJson(final IResource resource) {
+	public static boolean isPackageJson(final IResource resource) {
 		return (resource != null && NpmConstants.PACKAGE_JSON.equals(resource.getName()) && resource.exists());
 	}
 
@@ -137,13 +137,13 @@ public final class NpmUtil {
 		return directoryName;
 	}
 	
-	public static String getBowerExecutableLocation() {
-		String bowerExecutableLocation = null;
-		File bowerExecutable = new File(NpmPreferenceHolder.getBowerLocation(), NpmConstants.BOWER);
-		if (bowerExecutable != null && bowerExecutable.exists()) {
-			bowerExecutableLocation = bowerExecutable.getAbsolutePath();
+	public static String getNpmExecutableLocation() {
+		String npmExecutableLocation = null;
+		File npmExecutable = new File(NpmPreferenceHolder.getBowerLocation(), NpmConstants.NPM_CLI_JS);
+		if (npmExecutable != null && npmExecutable.exists()) {
+			npmExecutableLocation = npmExecutable.getAbsolutePath();
 		}
-		return bowerExecutableLocation;
+		return npmExecutableLocation;
 	}
 
 }

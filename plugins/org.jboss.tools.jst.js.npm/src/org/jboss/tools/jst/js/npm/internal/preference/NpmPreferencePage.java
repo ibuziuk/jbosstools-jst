@@ -20,7 +20,7 @@ import org.jboss.tools.jst.js.npm.internal.preference.editor.NpmHomeFieldEditor;
  * @author "Ilya Buziuk (ibuziuk)"
  */
 public class NpmPreferencePage extends FieldEditorPreferencePage implements IWorkbenchPreferencePage {
-	public static final String PAGE_ID = "org.jboss.tools.jst.js.bower.preferences.BowerPreferencesPage"; //$NON-NLS-1$
+	public static final String PAGE_ID = "org.jboss.tools.jst.js.npm.preferences.NpmPreferencesPage"; //$NON-NLS-1$
 
 	public NpmPreferencePage() {
 		super(GRID);
@@ -33,7 +33,7 @@ public class NpmPreferencePage extends FieldEditorPreferencePage implements IWor
 
 	@Override
 	protected void createFieldEditors() {
-		NpmHomeFieldEditor bowerHomeEditor = new NpmHomeFieldEditor(NpmPreferenceHolder.PREF_BOWER_LOCATION,
+		NpmHomeFieldEditor bowerHomeEditor = new NpmHomeFieldEditor(NpmPreferenceHolder.PREF_NPM_LOCATION,
 				Messages.NpmPreferencePage_NpmLocationLabel, getFieldEditorParent());
 		addField(bowerHomeEditor);
 	}

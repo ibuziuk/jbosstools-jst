@@ -45,7 +45,7 @@ public class NpmHomeFieldEditor extends DirectoryFieldEditor {
 		}
 
 		File selectedFile = new File(filename);
-		File bowerExecutable = new File(selectedFile, NpmConstants.BOWER);
+		File bowerExecutable = new File(selectedFile, NpmConstants.NPM_CLI_JS);
 		if (bowerExecutable == null || !bowerExecutable.exists()) {
 			setErrorMessage(Messages.NpmPreferencePage_NotValidNpmError);
 			return false;

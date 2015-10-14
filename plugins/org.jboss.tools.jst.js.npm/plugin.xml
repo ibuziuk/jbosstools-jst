@@ -17,7 +17,7 @@
             class="org.jboss.tools.jst.js.npm.internal.launch.shortcut.NpmUpdate"
             id="org.jboss.tools.jst.js.npm.update"
             label="npm Update"
-            icon="icons/npm_16.png"
+            icon="icons/npm_16_6.png"
             modes="run">
         <contextualLaunch>
             <enablement>

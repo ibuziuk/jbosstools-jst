@@ -23,17 +23,15 @@ public final class NpmConstants {
 	}
 
 	public static final String BIN = "bin"; //$NON-NLS-1$
-	public static final String BOWER = "bower"; //$NON-NLS-1$
 	public static final String BOWERRC = ".bowerrc"; //$NON-NLS-1$	
-	public static final String BOWER_CMD = "bower.cmd"; //$NON-NLS-1$
-	public static final String BOWER_COMPONENTS = "bower_components"; //$NON-NLS-1$
+	public static final String NPM_CLI_JS = "npm-cli.js"; //$NON-NLS-1$
 	public static final String PACKAGE_JSON = "package.json"; //$NON-NLS-1$
 	public static final String NODE_MODULES = "node_modules"; //$NON-NLS-1$
 	public static final String NPM = "npm"; //$NON-NLS-1$
 	public static final String PATH = "PATH"; //$NON-NLS-1$
 	public static final String UTF_8 = "UTF-8"; //$NON-NLS-1$
 	
-	// Default bower.json values
+	// Default package.json values
 	public static final String DEFAULT_NAME = "js"; //$NON-NLS-1$
 	public static final String DEFAULT_VERSION = "0.0.0"; //$NON-NLS-1$
 	public static final String DEFAULT_DESCRIPTION = ""; //$NON-NLS-1$

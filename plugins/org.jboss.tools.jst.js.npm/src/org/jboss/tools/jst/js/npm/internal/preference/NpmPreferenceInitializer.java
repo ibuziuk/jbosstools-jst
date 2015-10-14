@@ -23,8 +23,8 @@ public class NpmPreferenceInitializer extends AbstractPreferenceInitializer {
 	@Override
 	public void initializeDefaultPreferences() {
 		IPreferenceStore store = NpmPlugin.getDefault().getPreferenceStore();
-		String bowerLocation = NpmDetector.detectBower();
-		store.setDefault(NpmPreferenceHolder.PREF_BOWER_LOCATION, ((bowerLocation != null) ? bowerLocation : "")); //$NON-NLS-1$
+		String npm = NpmDetector.detectNpm();
+		store.setDefault(NpmPreferenceHolder.PREF_NPM_LOCATION, ((npm != null) ? npm : "")); //$NON-NLS-1$
 	}
 
 }

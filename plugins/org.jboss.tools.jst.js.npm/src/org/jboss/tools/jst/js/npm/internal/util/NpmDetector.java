@@ -24,7 +24,7 @@ public final class NpmDetector {
 	private NpmDetector() {
 	}
 
-	public static String detectBower() {
+	public static String detectNpm() {
 		String bowerLocation = null;
 		if (PlatformUtil.isWindows()) {
 			String npmLocation = detectNpmFromPath();
@@ -34,19 +34,19 @@ public final class NpmDetector {
 					npmLocation = npmLocation + separator;
 				}
 
-				File bowerHome = new File(npmLocation, NODE_MODULES + separator + BOWER + separator + BIN);
-				if (bowerHome != null && bowerHome.exists()) {
-					bowerLocation = bowerHome.getAbsolutePath();
+				File npmHome = new File(npmLocation, NODE_MODULES + separator + NPM + separator + BIN);
+				if (npmHome != null && npmHome.exists()) {
+					bowerLocation = npmHome.getAbsolutePath();
 				}
 			}
 		} else {
 			// Try to detect in "usr/local/bin" and "usr/bin" for Mac & Linux
 			File usrLocalBin = new File(USR_LOCAL_BIN);
-			if (isDetected(usrLocalBin, BOWER)) {
+			if (isDetected(usrLocalBin, NPM_CLI_JS)) {
 				bowerLocation = usrLocalBin.getAbsolutePath();
 			} else {
 				File usrBin = new File(USR_BIN);
-				if (isDetected(usrBin, BOWER)) {
+				if (isDetected(usrBin, NPM_CLI_JS)) {
 					bowerLocation = usrBin.getAbsolutePath();
 				}
 			}

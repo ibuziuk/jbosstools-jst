@@ -16,16 +16,16 @@ import org.eclipse.jface.preference.IPreferenceStore;
  * @author "Ilya Buziuk (ibuziuk)"
  */
 public class NpmPreferenceHolder {
-	public static final String PREF_BOWER_LOCATION = "Pref_Bower_Location"; //$NON-NLS-1$
+	public static final String PREF_NPM_LOCATION = "Pref_npm_Location"; //$NON-NLS-1$
 	
 	private static IPreferenceStore store;
 		
 	public static String getBowerLocation() {
-		return store.getString(PREF_BOWER_LOCATION);
+		return store.getString(PREF_NPM_LOCATION);
 	}
 
 	public static void setBowerLocation(String location) {
-		store.setValue(PREF_BOWER_LOCATION, location);
+		store.setValue(PREF_NPM_LOCATION, location);
 	}
 
 	public static IPreferenceStore getStore() {

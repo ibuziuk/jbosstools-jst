@@ -34,11 +34,11 @@ public final class NpmUpdateTester extends PropertyTester {
 			if (IS_NPM_INIT.equals(property) && receiver instanceof IResource) {
 				IResource resource = (IResource) receiver;
 				if (resource instanceof IProject) {
-					return NpmUtil.isBowerJsonExist((IProject) resource);
+					return NpmUtil.isPackageJsonExist((IProject) resource);
 				} else if (resource instanceof IFolder) {
-					return NpmUtil.hasBowerJson((IFolder) resource);
+					return NpmUtil.hasPackageJson((IFolder) resource);
 				} else if (resource instanceof IFile) {
-					return NpmUtil.isBowerJson((IFile) resource);
+					return NpmUtil.isPackageJson((IFile) resource);
 				}
 			}
 		} catch (CoreException e) {

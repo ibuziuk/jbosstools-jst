@@ -36,7 +36,7 @@ import org.jboss.tools.jst.js.node.util.NodeExternalUtil;
  * @author "Ilya Buziuk (ibuziuk)"
  */
 public class NpmUpdate extends GenericNativeNodeLaunch {
-	private static final String LAUNCH_NAME = "Bower Update"; //$NON-NLS-1$
+	private static final String LAUNCH_NAME = "npm Update"; //$NON-NLS-1$
 	
 	@Override
 	public void launch(ISelection selection, String mode) {
@@ -103,7 +103,7 @@ public class NpmUpdate extends GenericNativeNodeLaunch {
 	
 	private void launchBower(IResource resource) throws CoreException {
 		String nodeLocation = NodeExternalUtil.getNodeExecutableLocation();
-		String bowerLocation = NpmUtil.getBowerExecutableLocation();
+		String bowerLocation = NpmUtil.getNpmExecutableLocation();
 		if (nodeLocation == null || nodeLocation.isEmpty()) {
 			NodeExceptionNotifier.nodeLocationNotDefined();
 		} else if (bowerLocation == null || bowerLocation.isEmpty()) {
@@ -129,13 +129,13 @@ public class NpmUpdate extends GenericNativeNodeLaunch {
 				workingDir = parent.getFullPath().toOSString();
 			} else {
 				String directoryName = NpmUtil.getDirectoryName(bowerrc);
-				directoryName = (directoryName != null) ? directoryName : NpmConstants.BOWER_COMPONENTS;
+//				directoryName = (directoryName != null) ? directoryName : NpmConstants.BOWER_COMPONENTS;
 				workingDir = NpmUtil.getBowerWorkingDir(project, directoryName);
 			}
 		} else {
 			// Trying to find bower.json file ignoring "bower_components"
 			// (default components directory)
-			workingDir = NpmUtil.getBowerWorkingDir(project, NpmConstants.BOWER_COMPONENTS);
+//			workingDir = NpmUtil.getBowerWorkingDir(project, NpmConstants.BOWER_COMPONENTS);
 		}
 		return workingDir;
 	}
