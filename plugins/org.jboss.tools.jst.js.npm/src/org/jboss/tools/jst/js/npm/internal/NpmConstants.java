@@ -23,7 +23,6 @@ public final class NpmConstants {
 	}
 
 	public static final String BIN = "bin"; //$NON-NLS-1$
-	public static final String BOWERRC = ".bowerrc"; //$NON-NLS-1$	
 	public static final String NPM_CLI_JS = "npm-cli.js"; //$NON-NLS-1$
 	public static final String PACKAGE_JSON = "package.json"; //$NON-NLS-1$
 	public static final String NODE_MODULES = "node_modules"; //$NON-NLS-1$

@@ -10,10 +10,6 @@
  *******************************************************************************/
 package org.jboss.tools.jst.js.npm.internal.launch.shortcut;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-
-import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
@@ -23,14 +19,14 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.ide.ResourceUtil;
+import org.jboss.tools.jst.js.node.exception.NodeExceptionNotifier;
+import org.jboss.tools.jst.js.node.launch.shortcut.GenericNativeNodeLaunch;
+import org.jboss.tools.jst.js.node.util.NodeExternalUtil;
 import org.jboss.tools.jst.js.npm.NpmCommands;
 import org.jboss.tools.jst.js.npm.NpmPlugin;
 import org.jboss.tools.jst.js.npm.internal.NpmConstants;
 import org.jboss.tools.jst.js.npm.internal.ui.NpmExceptionNotifier;
 import org.jboss.tools.jst.js.npm.util.NpmUtil;
-import org.jboss.tools.jst.js.node.exception.NodeExceptionNotifier;
-import org.jboss.tools.jst.js.node.launch.shortcut.GenericNativeNodeLaunch;
-import org.jboss.tools.jst.js.node.util.NodeExternalUtil;
 
 /**
  * @author "Ilya Buziuk (ibuziuk)"
@@ -72,7 +68,7 @@ public class NpmUpdate extends GenericNativeNodeLaunch {
 	}
 
 	@Override
-	protected String getLaunchName() {
+	protected  String getLaunchName() {
 		return LAUNCH_NAME;
 	}
 
@@ -90,11 +86,8 @@ public class NpmUpdate extends GenericNativeNodeLaunch {
 				if (file.exists()) {
 					workingDir = resource.getFullPath().toOSString();
 				} else {
-					try {
-						workingDir = getWorkingDirectory(project);
-					} catch (IOException e) {
-						NpmPlugin.logError(e);
-					}
+					// Trying to find package.json file ignoring "node_modules" (default modules dir that can not be changed)
+					workingDir = NpmUtil.getBowerWorkingDir(project, NpmConstants.NODE_MODULES);
 				}
 			}
 		}
@@ -120,24 +113,24 @@ public class NpmUpdate extends GenericNativeNodeLaunch {
 	 * @throws UnsupportedEncodingException
 	 * @see <a href="http://bower.io/docs/config/">Bower Configuration</a>
 	 */
-	private String getWorkingDirectory(IProject project) throws CoreException, UnsupportedEncodingException {
-		String workingDir = null;
-		IFile bowerrc = NpmUtil.getBowerrc(project);
-		if (bowerrc != null) {
-			IContainer parent = bowerrc.getParent();
-			if (parent.exists() && parent.findMember(NpmConstants.PACKAGE_JSON) != null) {
-				workingDir = parent.getFullPath().toOSString();
-			} else {
-				String directoryName = NpmUtil.getDirectoryName(bowerrc);
+//	private String getWorkingDirectory(IProject project) throws CoreException, UnsupportedEncodingException {
+//		String workingDir = null;
+//		IFile bowerrc = NpmUtil.getBowerrc(project);
+//		if (bowerrc != null) {
+//			IContainer parent = bowerrc.getParent();
+//			if (parent.exists() && parent.findMember(NpmConstants.PACKAGE_JSON) != null) {
+//				workingDir = parent.getFullPath().toOSString();
+//			} else {
+//				String directoryName = NpmUtil.getDirectoryName(bowerrc);
 //				directoryName = (directoryName != null) ? directoryName : NpmConstants.BOWER_COMPONENTS;
-				workingDir = NpmUtil.getBowerWorkingDir(project, directoryName);
-			}
-		} else {
-			// Trying to find bower.json file ignoring "bower_components"
-			// (default components directory)
+//				workingDir = NpmUtil.getBowerWorkingDir(project, directoryName);
+//			}
+//		} else {
+//			// Trying to find bower.json file ignoring "bower_components"
+//			// (default components directory)
 //			workingDir = NpmUtil.getBowerWorkingDir(project, NpmConstants.BOWER_COMPONENTS);
-		}
-		return workingDir;
-	}
+//		}
+//		return workingDir;
+//	}
 	
 }
