@@ -15,12 +15,12 @@ import org.jboss.tools.jst.js.npm.NpmCommands;
 /**
  * @author "Ilya Buziuk (ibuziuk)"
  */
-public class NpmUpdate extends GenericNpmLaunch {
-	private static final String LAUNCH_NAME = "npm Update"; //$NON-NLS-1$
+public class NpmInstall extends GenericNpmLaunch {
+	private static final String LAUNCH_NAME = "npm Install"; //$NON-NLS-1$
 	
 	@Override
 	protected String getCommandName() {
-		return NpmCommands.UPDATE.getValue();
+		return NpmCommands.INSTALL.getValue();
 	}
 
 	@Override

@@ -6,7 +6,7 @@
 	    <propertyTester
 	      	id="org.jboss.tools.jst.js.npm.update.tester"
 	      	type="org.eclipse.core.resources.IResource"
-	      	namespace="org.jboss.tools.jst.js.npm.update"
+	      	namespace="org.jboss.tools.jst.js.npm"
 	      	properties="isNpmInit"
 	      	class="org.jboss.tools.jst.js.npm.internal.launch.tester.NpmUpdateTester">
 	    </propertyTester>
@@ -25,7 +25,30 @@
                     <count value="1"/>
                     <iterate>
                         <adapt  type="org.eclipse.core.resources.IResource">
-	                        <test property="org.jboss.tools.jst.js.npm.update.isNpmInit" 
+	                        <test property="org.jboss.tools.jst.js.npm.isNpmInit" 
+	                           	forcePluginActivation="true"/>
+                        </adapt> 
+                    </iterate>
+                </with>
+            </enablement>
+         </contextualLaunch>
+      </shortcut>
+   </extension>
+   <extension
+         point="org.eclipse.debug.ui.launchShortcuts">
+      <shortcut
+            class="org.jboss.tools.jst.js.npm.internal.launch.shortcut.NpmInstall"
+            id="org.jboss.tools.jst.js.npm.install"
+            label="npm Install"
+            icon="icons/npm_16_6.png"
+            modes="run">
+        <contextualLaunch>
+            <enablement>
+                <with variable="selection">
+                    <count value="1"/>
+                    <iterate>
+                        <adapt  type="org.eclipse.core.resources.IResource">
+	                        <test property="org.jboss.tools.jst.js.npm.isNpmInit" 
 	                           	forcePluginActivation="true"/>
                         </adapt> 
                     </iterate>
