@@ -40,7 +40,7 @@ public final class NpmConstants {
 	
 	@SuppressWarnings("serial")
 	public static final Map<String, String> DEFAULT_SCRIPTS = Collections.unmodifiableMap(new HashMap<String, String>() {{ 
-        put("scripts", "echo \"Error: no test specified\" && exit 1");  //$NON-NLS-1$//$NON-NLS-2$
+        put("test", "echo 'Error: no test specified' && exit 1");  //$NON-NLS-1$//$NON-NLS-2$
     }});
 
 }

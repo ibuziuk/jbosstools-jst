@@ -17,7 +17,7 @@
             class="org.jboss.tools.jst.js.npm.internal.launch.shortcut.NpmUpdate"
             id="org.jboss.tools.jst.js.npm.update"
             label="npm Update"
-            icon="icons/npm_16_6.png"
+            icon="icons/npm_16.png"
             modes="run">
         <contextualLaunch>
             <enablement>
@@ -40,7 +40,7 @@
             class="org.jboss.tools.jst.js.npm.internal.launch.shortcut.NpmInstall"
             id="org.jboss.tools.jst.js.npm.install"
             label="npm Install"
-            icon="icons/npm_16_6.png"
+            icon="icons/npm_16.png"
             modes="run">
         <contextualLaunch>
             <enablement>
@@ -64,7 +64,7 @@
             name="npm Init"
             class="org.jboss.tools.jst.js.npm.internal.wizard.NpmInitWizard"
             category="org.eclipse.wst.jsdt.ui.java"
-            icon="icons/npm_16_6.png">
+            icon="icons/npm_16.png">
             <description>npm Init</description>
             <selection class="org.eclipse.core.resources.IResource"/>
       </wizard>
