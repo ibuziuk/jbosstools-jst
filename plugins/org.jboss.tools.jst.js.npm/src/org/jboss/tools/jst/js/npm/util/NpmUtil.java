@@ -20,6 +20,7 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceVisitor;
 import org.eclipse.core.runtime.CoreException;
+import org.jboss.tools.common.util.PlatformUtil;
 import org.jboss.tools.jst.js.node.util.WorkbenchResourceUtil;
 import org.jboss.tools.jst.js.npm.PackageJson;
 import org.jboss.tools.jst.js.npm.internal.NpmConstants;
@@ -96,11 +97,33 @@ public final class NpmUtil {
 		
 	public static String getNpmExecutableLocation() {
 		String npmExecutableLocation = null;
-		File npmExecutable = new File(NpmPreferenceHolder.getBowerLocation(), NpmConstants.NPM_CLI_JS);
+		File npmExecutable = new File(NpmPreferenceHolder.getBowerLocation(), NpmUtil.getNpmExecutableName());
 		if (npmExecutable != null && npmExecutable.exists()) {
 			npmExecutableLocation = npmExecutable.getAbsolutePath();
 		}
 		return npmExecutableLocation;
+	}
+	
+	public static String getNpmExecutableName() {
+		String name = null;
+		switch(PlatformUtil.getOs()) {
+			case WINDOWS:
+				name = NpmConstants.NPM_CLI_JS;	
+				break;
+				
+			case MACOS:
+				name = NpmConstants.NPM;
+				break;
+				
+			case LINUX:
+				name = NpmConstants.NPM;
+				break;
+			
+			case OTHER:
+				name = NpmConstants.NPM;
+				break;
+		}
+		return name;
 	}
 
 }

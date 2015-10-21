@@ -22,7 +22,7 @@ import org.jboss.tools.jst.js.npm.internal.preference.NpmPreferencePage;
  */
 public class NpmExceptionNotifier {
 
-	public static void bowerLocationNotDefined() {
+	public static void npmLocationNotDefined() {
 		boolean define = MessageDialog.openQuestion(Display.getDefault().getActiveShell(),
 				Messages.NpmErrorHandler_NpmNotDefinedTitle, Messages.NpmErrorHandler_NpmNotDefinedMessage);
 		if (define) {

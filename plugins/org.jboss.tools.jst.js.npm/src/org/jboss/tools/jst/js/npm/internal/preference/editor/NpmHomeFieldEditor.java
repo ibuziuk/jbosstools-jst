@@ -15,8 +15,8 @@ import java.io.File;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.jface.preference.DirectoryFieldEditor;
 import org.eclipse.swt.widgets.Composite;
-import org.jboss.tools.jst.js.npm.internal.NpmConstants;
 import org.jboss.tools.jst.js.npm.internal.Messages;
+import org.jboss.tools.jst.js.npm.util.NpmUtil;
 
 /**
  * @author "Ilya Buziuk (ibuziuk)"
@@ -45,8 +45,8 @@ public class NpmHomeFieldEditor extends DirectoryFieldEditor {
 		}
 
 		File selectedFile = new File(filename);
-		File bowerExecutable = new File(selectedFile, NpmConstants.NPM_CLI_JS);
-		if (bowerExecutable == null || !bowerExecutable.exists()) {
+		File npmExecutable = new File(selectedFile, NpmUtil.getNpmExecutableName());
+		if (npmExecutable == null || !npmExecutable.exists()) {
 			setErrorMessage(Messages.NpmPreferencePage_NotValidNpmError);
 			return false;
 		}

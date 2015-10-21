@@ -90,14 +90,14 @@ public abstract class GenericNpmLaunch extends GenericNativeNodeLaunch {
 	
 	private void launchBower(IResource resource) throws CoreException {
 		String nodeLocation = NodeExternalUtil.getNodeExecutableLocation();
-		String bowerLocation = NpmUtil.getNpmExecutableLocation();
+		String npmLocation = NpmUtil.getNpmExecutableLocation();
 		if (nodeLocation == null || nodeLocation.isEmpty()) {
 			NodeExceptionNotifier.nodeLocationNotDefined();
-		} else if (bowerLocation == null || bowerLocation.isEmpty()) {
-			NpmExceptionNotifier.bowerLocationNotDefined();
+		} else if (npmLocation == null || npmLocation.isEmpty()) {
+			NpmExceptionNotifier.npmLocationNotDefined();
 		} else {
 			this.setWorkingProject(resource.getProject());
-			launchNodeTool(getWorkingDirectory(resource), nodeLocation, bowerLocation);
+			launchNodeTool(getWorkingDirectory(resource), nodeLocation, npmLocation);
 		}
 	}
 
