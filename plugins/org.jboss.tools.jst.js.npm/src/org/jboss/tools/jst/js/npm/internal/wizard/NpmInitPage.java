@@ -10,10 +10,6 @@
  *******************************************************************************/
 package org.jboss.tools.jst.js.npm.internal.wizard;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -51,12 +47,12 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.dialogs.ContainerSelectionDialog;
+import org.jboss.tools.jst.js.node.ui.PopUpKeyValueDialog;
+import org.jboss.tools.jst.js.node.util.WorkbenchResourceUtil;
 import org.jboss.tools.jst.js.npm.PackageJson;
 import org.jboss.tools.jst.js.npm.PackageJson.Builder;
-import org.jboss.tools.jst.js.npm.internal.NpmConstants;
 import org.jboss.tools.jst.js.npm.internal.Messages;
-import org.jboss.tools.jst.js.node.ui.PopUpPropertyDialog;
-import org.jboss.tools.jst.js.node.util.WorkbenchResourceUtil;
+import org.jboss.tools.jst.js.npm.internal.NpmConstants;
 
 /**
  * @author "Ilya Buziuk (ibuziuk)"
@@ -68,23 +64,23 @@ public class NpmInitPage extends WizardPage {
 	private Text dirText;
 	private Text nameText;
 	private Text versionText;
+	private Text descriptionText;
+	private Text mainText;
+	private Text authorText;
 	private Text licenseText;
+	
 	private Button useDefaultCheckBox;
 	
 	private Table scriptsTable;
 	private Button addScriptButton;
 
-	//	private Table authorsTable;
-//	private Button addAuthorButton;
-	
-//	private Table ignoreTable;
-//	private Button addIgnoreButton;
-
 	private String defaultName;
 	private String defaultVersion;
+	private String defaultDescription;
+	private String defaultMain;
+	private String defaultAuthor;	
 	private String defaultLicense;
-//	private List<String> defaultAuthors;
-//	private List<String> defaultIgnore;
+	
 	private String defaultDirectory;
 	private Map<String, String> defaultScripts;
 	
@@ -121,11 +117,12 @@ public class NpmInitPage extends WizardPage {
 	public PackageJson getModel() {
 		String name = nameText.getText();
 		String version = versionText.getText();
+		String description = descriptionText.getText();
+		String main = mainText.getText();
+		String author = authorText.getText();
 		String license = licenseText.getText();
-//		List<String> authors = getItems(authorsTable);
-//		List<String> ignore = getItems(ignoreTable);
 		Map<String, String> scripts = getKeyValueItems(scriptsTable);
-		
+
 		Builder builder = new PackageJson.Builder();
 	
 		if (name != null && !name.isEmpty()) {
@@ -136,22 +133,26 @@ public class NpmInitPage extends WizardPage {
 			builder.version(version);
 		}
 		
-		if (license != null && !license.isEmpty()) {
-			builder.license(license);
+		if (description != null) { // empty by default
+			builder.description(description);
+		}
+		
+		if (main != null && !main.isEmpty()) {
+			builder.main(main);
 		}
 		
 		if (scripts != null && !scripts.isEmpty()) {
 			builder.scripts(scripts);
 		}
 		
-//		if (authors != null && !authors.isEmpty()) {
-//			builder.authrors(authors);
-//		}
-//		
-//		if (ignore != null && !ignore.isEmpty()) {
-//			builder.ignore(ignore);
-//		}
+		if (author != null) { // empty by default
+			builder.author(author);
+		}
 		
+		if (license != null && !license.isEmpty()) {
+			builder.license(license);
+		}
+			
 		PackageJson model = builder.build();
 
 		return model;
@@ -164,42 +165,36 @@ public class NpmInitPage extends WizardPage {
 		String location = WorkbenchResourceUtil.getAbsolutePath(selectedContainer);
 		
 		this.defaultDirectory = (location != null) ? location : "";  //$NON-NLS-1$
-		this.defaultName = (selectedContainer != null) ? selectedContainer.getProject().getName() : NpmConstants.DEFAULT_NAME;
+		this.defaultName = (selectedContainer != null) ? selectedContainer.getProject().getName().replaceAll("\\s","") : NpmConstants.DEFAULT_NAME; //$NON-NLS-1$ //$NON-NLS-2$
 		
 		this.defaultVersion = NpmConstants.DEFAULT_VERSION; 
 		this.defaultLicense =  NpmConstants.DEFAULT_LICENSE;
-		
-//		this.defaultIgnore =  Arrays.asList(NpmConstants.DEFAULT_IGNORE);
-		
+		this.defaultDescription = NpmConstants.DEFAULT_DESCRIPTION;
+		this.defaultMain = NpmConstants.DEFAULT_MAIN;
+		this.defaultAuthor = NpmConstants.DEFAULT_AUTHOR;		
 		this.defaultScripts = NpmConstants.DEFAULT_SCRIPTS;
 				
 		this.dirText.setText(defaultDirectory);
 		this.nameText.setText(defaultName);
 		this.versionText.setText(defaultVersion);
+		this.descriptionText.setText(defaultDescription);
+		this.mainText.setText(defaultMain);
+		this.authorText.setText(defaultAuthor);
 		this.licenseText.setText(defaultLicense);
 		
 		setDefaults(scriptsTable, defaultScripts); 
-		
-		// Authors
-//		setDefaults(authorsTable, defaultAuthors);
-//		// Ignore
-//		setDefaults(ignoreTable, defaultIgnore);
-		
+				
 		boolean useDefault = useDefaultCheckBox.getSelection();
 		
 		this.nameText.setEnabled(!useDefault);
 		this.versionText.setEnabled(!useDefault);
+		this.descriptionText.setEnabled(!useDefault);
+		this.mainText.setEnabled(!useDefault);
+		this.authorText.setEnabled(!useDefault);
 		this.licenseText.setEnabled(!useDefault);
-		
 		
 		this.scriptsTable.setEnabled(!useDefault);
 		this.addScriptButton.setEnabled(!useDefault);
-		
-//		this.authorsTable.setEnabled(!useDefault);
-//		this.addAuthorButton.setEnabled(!useDefault);
-		
-//		this.ignoreTable.setEnabled(!useDefault);
-//		this.addIgnoreButton.setEnabled(!useDefault);
 	}
 	
 	private void createExecutionDirEditor(Composite mainComposite) {
@@ -255,25 +250,24 @@ public class NpmInitPage extends WizardPage {
 				boolean useDefault = ((Button) e.widget).getSelection();
 				nameText.setEnabled(!useDefault);
 				versionText.setEnabled(!useDefault);
+				descriptionText.setEnabled(!useDefault);
+				mainText.setEnabled(!useDefault);
+				authorText.setEnabled(!useDefault);
 				licenseText.setEnabled(!useDefault);
 				scriptsTable.setEnabled(!useDefault);
 				addScriptButton.setEnabled(!useDefault);
-//				authorsTable.setEnabled(!useDefault);
-//				addAuthorButton.setEnabled(!useDefault);
-//				ignoreTable.setEnabled(!useDefault);
-//				addIgnoreButton.setEnabled(!useDefault);
+				
 				if (useDefault) {
 					setDefaults();
 				} else {
 					nameText.setEnabled(true);
 					versionText.setEnabled(true);
+					descriptionText.setEnabled(true);
+					mainText.setEnabled(true);
+					authorText.setEnabled(true);
 					licenseText.setEnabled(true);
 					scriptsTable.setEnabled(true);
 					addScriptButton.setEnabled(true);
-//					authorsTable.setEnabled(true);
-//					addAuthorButton.setEnabled(true);
-//					ignoreTable.setEnabled(true);
-//					addIgnoreButton.setEnabled(true);
 				}
 			}
 		});
@@ -293,7 +287,25 @@ public class NpmInitPage extends WizardPage {
 		versionText = new Text(group, SWT.BORDER);
 		versionText.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		versionText.addModifyListener(new EntriesChangedListener());
-
+		
+		Label descriptionLabel = new Label(group, SWT.NONE);
+		descriptionLabel.setText("Description");
+		descriptionText = new Text(group, SWT.BORDER);
+		descriptionText.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		descriptionText.addModifyListener(new EntriesChangedListener());
+		
+		Label mainLabel = new Label(group, SWT.NONE);
+		mainLabel.setText("Main");
+		mainText = new Text(group, SWT.BORDER);
+		mainText.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		mainText.addModifyListener(new EntriesChangedListener());
+		
+		Label authorLabel = new Label(group, SWT.NONE);
+		authorLabel.setText("Author");
+		authorText = new Text(group, SWT.BORDER);
+		authorText.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		authorText.addModifyListener(new EntriesChangedListener());
+		
 		Label licenseLabel = new Label(group, SWT.NONE);
 		licenseLabel.setText(Messages.NpmInitWizard_License);
 		licenseText = new Text(group, SWT.BORDER);
@@ -303,45 +315,16 @@ public class NpmInitPage extends WizardPage {
 	
 	private void createScriptsEditor(Composite mainComposite) {
 		TableGroupComposite scriptsComposite = new TableGroupComposite("Scripts",
-				"Scripts", mainComposite, "add Script", "edit Script");
+				"Name", "Value", mainComposite, "add Script", "edit Script");
 		scriptsComposite.createControls();
 		this.scriptsTable = scriptsComposite.getTable();
 		this.addScriptButton = scriptsComposite.getAddButton();
 	}
 	
 	
-	
-//	private void createAuthorsEditor(Composite mainComposite) {
-//		TableGroupComposite authorsComposite = new TableGroupComposite(Messages.BowerLaunchConfigurationTab_Authors,
-//				Messages.BowerLaunchConfigurationTab_Author, mainComposite, Messages.BowerInitWizard_addAuthor, Messages.BowerInitWizard_editAuthor);
-//		authorsComposite.createControls();
-//		this.authorsTable = authorsComposite.getTable();
-//		this.addAuthorButton = authorsComposite.getAddButton();
-//	}
-	
-//	private void createIgnoreEditor(Composite mainComposite) {
-//		TableGroupComposite ignoreComposite = new TableGroupComposite(Messages.BowerLaunchConfigurationTab_Ignore,
-//				Messages.BowerLaunchConfigurationTab_Ignore, mainComposite, Messages.BowerInitWizard_addIgnore, Messages.BowerInitWizard_editIgnore); 
-//		ignoreComposite.createControls();
-//		this.ignoreTable = ignoreComposite.getTable();
-//		this.addIgnoreButton = ignoreComposite.getAddButton();
-//	}
-	
-
 	@Override
 	public String getName() {
 		return Messages.NpmInitWizard_LaunchMainTabName;
-	}
-	
-	private List<String> getItems(Table table) {
-		List<String> authors = new ArrayList<>();
-		TableItem[] items = table.getItems();
-		if (items != null && items.length > 0) {
-			for (TableItem item : items) {
-				authors.add(item.getText());
-			}
-		}
-		return authors;
 	}
 	
 	private Map<String, String> getKeyValueItems(Table table) {
@@ -355,14 +338,6 @@ public class NpmInitPage extends WizardPage {
 		return map;
 	}
 	
-	private void setDefaults(Table table, List<String> defaultItems) {
-		if (table != null && defaultItems != null && !defaultItems.isEmpty()) {
-			table.removeAll();
-			for (String item : defaultItems) {
-				new TableItem(table, SWT.NONE).setText(item);
-			}
-		}
-	}
 	
 	private void setDefaults(Table table, Map<String, String> defaultItems) {
 		if (table != null && defaultItems != null && !defaultItems.isEmpty()) {
@@ -379,11 +354,11 @@ public class NpmInitPage extends WizardPage {
 	private void setDefaults() {
 		nameText.setText(defaultName);
 		versionText.setText(defaultVersion);
+		descriptionText.setText(defaultDescription);
+		mainText.setText(defaultMain);
+		authorText.setText(defaultAuthor);
 		licenseText.setText(defaultLicense);
 		setDefaults(scriptsTable, defaultScripts);
-		
-//		setDefaults(authorsTable, defaultAuthors);
-//		setDefaults(ignoreTable, defaultIgnore);	
 	}
 	
 	private class EntriesChangedListener implements ModifyListener, SelectionListener {
@@ -402,7 +377,8 @@ public class NpmInitPage extends WizardPage {
 	
 	private class TableGroupComposite {
 		private String groupLabel;
-		private String propertyLabel;
+		private String keyLabel;
+		private String valueLabel;
 		private Composite parent;
 		private Table table;
 		private Button addButton;
@@ -411,9 +387,10 @@ public class NpmInitPage extends WizardPage {
 		private String addDialogTitle;
 		private String editDialogTitle;
 		
-		public TableGroupComposite(String groupLabel, String propertyLabel, Composite parent, String addDialogTitle, String editDialogTitle) {
+		public TableGroupComposite(String groupLabel, String keyLabel, String valueLabel, Composite parent, String addDialogTitle, String editDialogTitle) {
 			this.groupLabel = groupLabel;
-			this.propertyLabel = propertyLabel;
+			this.keyLabel = keyLabel;
+			this.valueLabel = valueLabel;
 			this.parent = parent;
 			this.addDialogTitle = addDialogTitle;
 			this.editDialogTitle = editDialogTitle;
@@ -466,10 +443,10 @@ public class NpmInitPage extends WizardPage {
 
 		    final TableColumn propColumn = new TableColumn(this.table, SWT.NONE, 0);
 		    propColumn.setWidth(120);
-		    propColumn.setText("Key"); //$NON-NLS-1$
+		    propColumn.setText("Name"); //$NON-NLS-1$
 		    
 		    final TableColumn valueColumn = new TableColumn(this.table, SWT.NONE, 1);
-		    valueColumn.setWidth(200);
+		    valueColumn.setWidth(250);
 		    valueColumn.setText("Value"); //$NON-NLS-1$
 
 			Composite buttonComposite = new Composite(tableGroup, SWT.NONE);
@@ -510,18 +487,22 @@ public class NpmInitPage extends WizardPage {
 		}
 		
 		private void addProperty(String title) {
-			PopUpPropertyDialog dialog = new PopUpPropertyDialog(getShell(), title, propertyLabel, "", null); //$NON-NLS-1$
+			PopUpKeyValueDialog dialog = new PopUpKeyValueDialog(getShell(), title, "", "", keyLabel, valueLabel,  null); //$NON-NLS-1$ //$NON-NLS-2$
 			if (dialog.open() == IDialogConstants.OK_ID) {
 				TableItem item = new TableItem(table, SWT.NONE);
-				item.setText(0, dialog.getName());
+				item.setText(0, dialog.getKey());
+				item.setText(1, dialog.getValue());
+				entriesChanged();
 			}
 		}
 
 		private void editProperty(String title, String name, String value) {
-			PopUpPropertyDialog dialog = new PopUpPropertyDialog(getShell(), title, propertyLabel, name, null);
+			PopUpKeyValueDialog dialog = new PopUpKeyValueDialog(getShell(), title, name, value, keyLabel, valueLabel,  null);
 			if (dialog.open() == IDialogConstants.OK_ID) {
 				TableItem[] item = table.getSelection();
-				item[0].setText(0, dialog.getName());
+				item[0].setText(0, dialog.getKey());
+				item[0].setText(1, dialog.getValue());
+				entriesChanged();
 			}
 		}
 	}
@@ -538,7 +519,6 @@ public class NpmInitPage extends WizardPage {
 				if (bowerJson.exists()) {
 					setError(Messages.NpmInitWizard_ErrorPackageJsonAlreadyExist);
 				} else {
-					
 					setComplete();
 				}
 			} else {

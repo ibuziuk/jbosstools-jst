@@ -33,8 +33,8 @@ public final class NpmConstants {
 	// Default package.json values
 	public static final String DEFAULT_NAME = "js"; //$NON-NLS-1$
 	public static final String DEFAULT_VERSION = "0.0.0"; //$NON-NLS-1$
-	public static final String DEFAULT_DESCRIPTION = ""; //$NON-NLS-1$
-	public static final String DEFAULT_MAIN = "index.html"; //$NON-NLS-1$
+	public static final String DEFAULT_DESCRIPTION = "Generated with JBoss npm Tools"; //$NON-NLS-1$
+	public static final String DEFAULT_MAIN = "index.js"; //$NON-NLS-1$
 	public static final String DEFAULT_AUTHOR = ""; //$NON-NLS-1$
 	public static final String DEFAULT_LICENSE = "ISC"; //$NON-NLS-1$
 	
