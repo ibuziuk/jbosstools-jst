@@ -39,12 +39,21 @@ public class Messages extends NLS {
 	public static String NpmInitWizard_Name;
 	public static String NpmInitWizard_Version;
 	public static String NpmInitWizard_License;
+	public static String NpmInitWizard_Description;
+	public static String NpmInitWizard_Main;
+	public static String NpmInitWizard_Author;
 	public static String NpmInitWizard_Properties;
-	public static String NpminitWizard_AddParameter;
-	public static String NpmINitWizard_EditParameter;
 	public static String NpmInitWizard_PageName;
 	public static String NpmInitWizard_PageTitle;
 	public static String NpmInitWizard_PageDescription;
+	
+	public static String NpmInitWizard_Scripts;
+	public static String NpmInitWizard_ScriptName;
+	public static String NpmInitWizard_ScriptValue;
+	public static String NpmInitWizard_ScriptPopUpName;
+	public static String NpmInitWizard_ScriptPopUpValue;
+	public static String NpmInitWizard_AddScript;
+	public static String NpmInitWizard_EditScript;
 	
 	public static String NpmInitWizard_ErrorDirNotDefiened;
 	public static String NpmInitWizard_ErrorDirNotExist;

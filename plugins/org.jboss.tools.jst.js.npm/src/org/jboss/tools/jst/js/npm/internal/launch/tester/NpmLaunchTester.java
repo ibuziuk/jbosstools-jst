@@ -22,10 +22,10 @@ import org.eclipse.core.expressions.PropertyTester;
 /**
  * @author Ilya Buziuk (ibuziuk)
  */
-public final class NpmUpdateTester extends PropertyTester {
+public final class NpmLaunchTester extends PropertyTester {
 	private static final String IS_NPM_INIT = "isNpmInit"; //$NON-NLS-1$
 
-	public NpmUpdateTester() {
+	public NpmLaunchTester() {
 	}
 
 	@Override

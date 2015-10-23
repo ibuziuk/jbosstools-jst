@@ -8,7 +8,7 @@
 	      	type="org.eclipse.core.resources.IResource"
 	      	namespace="org.jboss.tools.jst.js.npm"
 	      	properties="isNpmInit"
-	      	class="org.jboss.tools.jst.js.npm.internal.launch.tester.NpmUpdateTester">
+	      	class="org.jboss.tools.jst.js.npm.internal.launch.tester.NpmLaunchTester">
 	    </propertyTester>
    </extension>
    <extension

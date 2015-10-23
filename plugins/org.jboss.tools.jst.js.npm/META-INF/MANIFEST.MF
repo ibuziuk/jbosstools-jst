@@ -25,4 +25,4 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
 Bundle-Localization: plugin
 Export-Package: org.jboss.tools.jst.js.npm,
- org.jboss.tools.jst.js.npm
+ org.jboss.tools.jst.js.npm.internal.util

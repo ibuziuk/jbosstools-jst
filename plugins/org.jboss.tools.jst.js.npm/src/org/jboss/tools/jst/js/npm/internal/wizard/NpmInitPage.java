@@ -96,20 +96,17 @@ public class NpmInitPage extends WizardPage {
 		initializeDialogUnits(parent);
 		Composite mainComposite = SWTFactory.createComposite(parent, parent.getFont(), 1, 1, GridData.FILL_BOTH);
 		((GridLayout) mainComposite.getLayout()).verticalSpacing = 4;
-		
+
 		createExecutionDirEditor(mainComposite);
 		createUseDefaultsEditor(mainComposite);
 		createBasePropertyEditor(mainComposite);
 		createScriptsEditor(mainComposite);
 
-//		createAuthorsEditor(mainComposite);
-//		createIgnoreEditor(mainComposite);
-		
 		Dialog.applyDialogFont(mainComposite);
 		initiDefaultsValues();
 		setControl(mainComposite);
 	}
-	
+
 	public String getExecutionDir() {
 		return dirText.getText();
 	}
@@ -242,7 +239,6 @@ public class NpmInitPage extends WizardPage {
 	private void createUseDefaultsEditor(Composite mainComposite) {
 		Composite group = SWTFactory.createComposite(mainComposite, 2, 1, GridData.FILL_HORIZONTAL);
 		useDefaultCheckBox = SWTFactory.createCheckButton(group, Messages.NpmInitWizard_UseDefaulConfiguration, null, true, 2);
-
 		useDefaultCheckBox.addSelectionListener(new SelectionAdapter() {
 
 			@Override
@@ -289,19 +285,19 @@ public class NpmInitPage extends WizardPage {
 		versionText.addModifyListener(new EntriesChangedListener());
 		
 		Label descriptionLabel = new Label(group, SWT.NONE);
-		descriptionLabel.setText("Description");
+		descriptionLabel.setText(Messages.NpmInitWizard_Description);
 		descriptionText = new Text(group, SWT.BORDER);
 		descriptionText.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		descriptionText.addModifyListener(new EntriesChangedListener());
 		
 		Label mainLabel = new Label(group, SWT.NONE);
-		mainLabel.setText("Main");
+		mainLabel.setText(Messages.NpmInitWizard_Main);
 		mainText = new Text(group, SWT.BORDER);
 		mainText.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		mainText.addModifyListener(new EntriesChangedListener());
 		
 		Label authorLabel = new Label(group, SWT.NONE);
-		authorLabel.setText("Author");
+		authorLabel.setText(Messages.NpmInitWizard_Author);
 		authorText = new Text(group, SWT.BORDER);
 		authorText.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		authorText.addModifyListener(new EntriesChangedListener());
@@ -314,8 +310,9 @@ public class NpmInitPage extends WizardPage {
 	}
 	
 	private void createScriptsEditor(Composite mainComposite) {
-		TableGroupComposite scriptsComposite = new TableGroupComposite("Scripts",
-				"Name", "Value", mainComposite, "add Script", "edit Script");
+		TableGroupComposite scriptsComposite = new TableGroupComposite(Messages.NpmInitWizard_Scripts,
+				Messages.NpmInitWizard_ScriptPopUpName, Messages.NpmInitWizard_ScriptPopUpValue, mainComposite,
+				Messages.NpmInitWizard_AddScript, Messages.NpmInitWizard_EditScript);
 		scriptsComposite.createControls();
 		this.scriptsTable = scriptsComposite.getTable();
 		this.addScriptButton = scriptsComposite.getAddButton();
@@ -404,7 +401,6 @@ public class NpmInitPage extends WizardPage {
 			return this.addButton;
 		}
 		
-
 		public void createControls() {
 			Composite tableGroup = SWTFactory.createGroup(parent, groupLabel, 2, 1, GridData.FILL_HORIZONTAL);
 			TableViewer tableViewer = new TableViewer(tableGroup, SWT.BORDER | SWT.FULL_SELECTION | SWT.MULTI);
@@ -443,11 +439,11 @@ public class NpmInitPage extends WizardPage {
 
 		    final TableColumn propColumn = new TableColumn(this.table, SWT.NONE, 0);
 		    propColumn.setWidth(120);
-		    propColumn.setText("Name"); //$NON-NLS-1$
+		    propColumn.setText(Messages.NpmInitWizard_ScriptName); 
 		    
 		    final TableColumn valueColumn = new TableColumn(this.table, SWT.NONE, 1);
 		    valueColumn.setWidth(250);
-		    valueColumn.setText("Value"); //$NON-NLS-1$
+		    valueColumn.setText(Messages.NpmInitWizard_ScriptValue); 
 
 			Composite buttonComposite = new Composite(tableGroup, SWT.NONE);
 			FillLayout fillLayout = new FillLayout(SWT.VERTICAL);

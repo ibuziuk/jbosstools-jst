@@ -150,7 +150,7 @@ public class BowerInitPage extends WizardPage {
 		String location = WorkbenchResourceUtil.getAbsolutePath(selectedContainer);
 		
 		this.defaultDirectory = (location != null) ? location : "";  //$NON-NLS-1$
-		this.defaultName = (selectedContainer != null) ? selectedContainer.getProject().getName() : BowerConstants.DEFAULT_NAME;
+		this.defaultName = (selectedContainer != null) ? selectedContainer.getProject().getName().replaceAll("\\s", "") : BowerConstants.DEFAULT_NAME; //$NON-NLS-1$ //$NON-NLS-2$
 		
 		this.defaultVersion = BowerConstants.DEFAULT_VERSION; 
 		this.defaultLicense =  BowerConstants.DEFAULT_LICENSE;
