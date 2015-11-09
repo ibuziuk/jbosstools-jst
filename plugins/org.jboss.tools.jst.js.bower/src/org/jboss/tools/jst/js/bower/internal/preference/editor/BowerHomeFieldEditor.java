@@ -10,10 +10,8 @@
  *******************************************************************************/
 package org.jboss.tools.jst.js.bower.internal.preference.editor;
 
-import java.io.File;
-
 import org.eclipse.core.runtime.IStatus;
-import org.eclipse.jface.preference.DirectoryFieldEditor;
+import org.eclipse.jface.preference.FileFieldEditor;
 import org.eclipse.swt.widgets.Composite;
 import org.jboss.tools.jst.js.bower.internal.BowerConstants;
 import org.jboss.tools.jst.js.bower.internal.Messages;
@@ -21,7 +19,7 @@ import org.jboss.tools.jst.js.bower.internal.Messages;
 /**
  * @author "Ilya Buziuk (ibuziuk)"
  */
-public class BowerHomeFieldEditor extends DirectoryFieldEditor {
+public class BowerHomeFieldEditor extends FileFieldEditor {
 
 	public BowerHomeFieldEditor(String name, String label, Composite composite) {
 		super(name, label, composite);
@@ -39,17 +37,12 @@ public class BowerHomeFieldEditor extends DirectoryFieldEditor {
 			// clear the warning message
 			this.getPage().setMessage(null);
 		}
-
-		if (!filename.endsWith(File.separator)) {
-			filename = filename + File.separator;
-		}
-
-		File selectedFile = new File(filename);
-		File bowerExecutable = new File(selectedFile, BowerConstants.BOWER);
-		if (bowerExecutable == null || !bowerExecutable.exists()) {
+		
+		if (!filename.endsWith(BowerConstants.BOWER)) {
 			setErrorMessage(Messages.BowerPreferencePage_NotValidBowerError);
-			return false;
+			return false;	
 		}
+		
 		return true;
 	}
 

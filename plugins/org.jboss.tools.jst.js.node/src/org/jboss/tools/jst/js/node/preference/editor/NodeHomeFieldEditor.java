@@ -10,10 +10,8 @@
  *******************************************************************************/
 package org.jboss.tools.jst.js.node.preference.editor;
 
-import java.io.File;
-
 import org.eclipse.core.runtime.IStatus;
-import org.eclipse.jface.preference.DirectoryFieldEditor;
+import org.eclipse.jface.preference.FileFieldEditor;
 import org.eclipse.swt.widgets.Composite;
 import org.jboss.tools.jst.js.node.Constants;
 import org.jboss.tools.jst.js.node.Messages;
@@ -23,7 +21,7 @@ import org.jboss.tools.jst.js.node.util.PlatformUtil;
 /**
  * @author "Ilya Buziuk (ibuziuk)"
  */
-public class NodeHomeFieldEditor extends DirectoryFieldEditor {
+public class NodeHomeFieldEditor extends FileFieldEditor {
 
 	public NodeHomeFieldEditor(String name, String label, Composite composite) {
 		super(name, label, composite);
@@ -41,40 +39,24 @@ public class NodeHomeFieldEditor extends DirectoryFieldEditor {
 			// clear the warning message
 			this.getPage().setMessage(null);
 		}
-
-		if (!filename.endsWith(File.separator)) {
-			filename = filename + File.separator;
-		}
-
-		File selectedFile = new File(filename);
-		String nodeExecutableName = NodeExternalUtil.getNodeExecutableName();
-		File nodeExecutable = new File(selectedFile, nodeExecutableName);
 		
-		if (!nodeExecutable.exists()) {
-			
-			if (PlatformUtil.isMacOS()) {
-				setErrorMessage(Messages.NodePreferencePage_NotValidNodeError);
-				return false;				
-			} 
-			
-			// JBIDE-20351 Bower tooling doesn't detect node when the binary is called 'nodejs'
-			// If "nodejs" is not detected try to detect "node"
-			if (PlatformUtil.isLinux()) {
-				nodeExecutableName = Constants.NODE;
-			
-			//JBIDE-20988 Preference validation fails on windows if node executable called node64.exe
-			} else if (PlatformUtil.isWindows()) {
-				nodeExecutableName = Constants.NODE_64_EXE;
-			}
-			
-			nodeExecutable = new File(selectedFile, nodeExecutableName);
-			if (!nodeExecutable.exists()) {
-				setErrorMessage(Messages.NodePreferencePage_NotValidNodeError);
-				return false;				
-			}
-		}
 
-		return true;
+		if (filename.endsWith(NodeExternalUtil.getNodeExecutableName())) {
+			return true;
+			
+		// JBIDE-20351 Bower tooling doesn't detect node when the binary is called 'nodejs'
+		// If "nodejs" is not detected try to detect "node"
+		} else if (PlatformUtil.isLinux() && filename.endsWith(Constants.NODE)) {
+			return true;
+		
+		//JBIDE-20988 Preference validation fails on windows if node executable called node64.exe
+		} else if (PlatformUtil.isWindows() && filename.endsWith(Constants.NODE_64_EXE)) {
+			return true;
+			
+		} else {
+			setErrorMessage(Messages.NodePreferencePage_NotValidNodeError);
+			return false;				
+		}
 	}
 
 	@Override

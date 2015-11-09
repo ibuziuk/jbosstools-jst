@@ -25,6 +25,7 @@ import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.ide.ResourceUtil;
 import org.jboss.tools.jst.js.bower.BowerPlugin;
 import org.jboss.tools.jst.js.bower.internal.BowerConstants;
+import org.jboss.tools.jst.js.bower.internal.preference.BowerPreferenceHolder;
 import org.jboss.tools.jst.js.bower.internal.ui.BowerExceptionNotifier;
 import org.jboss.tools.jst.js.bower.util.BowerUtil;
 import org.jboss.tools.jst.js.node.exception.NodeExceptionNotifier;
@@ -97,7 +98,7 @@ public abstract class GenericBowerLaunch extends GenericNativeNodeLaunch {
 	
 	private void launchBower(IResource resource) throws CoreException {
 		String nodeLocation = NodeExternalUtil.getNodeExecutableLocation();
-		String bowerLocation = BowerUtil.getBowerExecutableLocation();
+		String bowerLocation = BowerPreferenceHolder.getBowerLocation();
 		if (nodeLocation == null || nodeLocation.isEmpty()) {
 			NodeExceptionNotifier.nodeLocationNotDefined();
 		} else if (bowerLocation == null || bowerLocation.isEmpty()) {

@@ -137,13 +137,13 @@ public final class BowerUtil {
 		return directoryName;
 	}
 	
-	public static String getBowerExecutableLocation() {
-		String bowerExecutableLocation = null;
-		File bowerExecutable = new File(BowerPreferenceHolder.getBowerLocation(), BowerConstants.BOWER);
-		if (bowerExecutable != null && bowerExecutable.exists()) {
-			bowerExecutableLocation = bowerExecutable.getAbsolutePath();
-		}
-		return bowerExecutableLocation;
-	}
+//	public static String getBowerExecutableLocation() {
+//		String bowerExecutableLocation = null;
+//		File bowerExecutable = new File(BowerPreferenceHolder.getBowerLocation(), BowerConstants.BOWER);
+//		if (bowerExecutable != null && bowerExecutable.exists()) {
+//			bowerExecutableLocation = bowerExecutable.getAbsolutePath();
+//		}
+//		return bowerExecutableLocation;
+//	}
 
 }

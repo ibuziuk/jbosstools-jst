@@ -10,7 +10,6 @@
  ******************************************************************************/
 package org.jboss.tools.jst.js.node.util;
 
-import java.io.File;
 import org.jboss.tools.jst.js.node.Constants;
 import org.jboss.tools.jst.js.node.preference.NodePreferenceHolder;
 
@@ -20,30 +19,8 @@ import org.jboss.tools.jst.js.node.preference.NodePreferenceHolder;
 public final class NodeExternalUtil {
 	
 	public static String getNodeExecutableLocation() {
-		String nodeExecutableLocation = null;
-		String nodeExecutableName = getNodeExecutableName();
-		File nodeExecutable = new File(NodePreferenceHolder.getNodeLocation(), nodeExecutableName);
-		
-		if (nodeExecutable.exists()) {
-			nodeExecutableLocation = nodeExecutable.getAbsolutePath();
-		} else if (!PlatformUtil.isMacOS()) {
-			
-			// JBIDE-20351 Bower tooling doesn't detect node when the binary is called 'nodejs'
-			// If "nodejs" is not detected try to detect "node"
-			if (PlatformUtil.isLinux()) {
-				nodeExecutableName = Constants.NODE;
-				
-			//JBIDE-20988 Preference validation fails on windows if node executable called node64.exe
-			} else if (PlatformUtil.isWindows()) {
-				nodeExecutableName = Constants.NODE_64_EXE;
-			}
-			
-			nodeExecutable = new File(NodePreferenceHolder.getNodeLocation(), nodeExecutableName);
-			if (nodeExecutable.exists()) {
-				nodeExecutableLocation = nodeExecutable.getAbsolutePath();
-			}				
-		}
-		return nodeExecutableLocation;
+		// TODO: validate here one more time ?
+		return NodePreferenceHolder.getNodeLocation();
 	}
 	
 	public static String getNodeExecutableName() {
@@ -67,5 +44,4 @@ public final class NodeExternalUtil {
 		}
 		return name;
 	}
-
 }
